@@ -14,6 +14,7 @@
 		18E5BB6E1C7210EC00864DFD /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB6D1C7210EC00864DFD /* Images.xcassets */; };
 		18E5BB711C7210EC00864DFD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB6F1C7210EC00864DFD /* LaunchScreen.xib */; };
 		18E5BB7D1C7210EC00864DFD /* IGCMenuExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5BB7C1C7210EC00864DFD /* IGCMenuExampleTests.m */; };
+		18E5BB891C72112E00864DFD /* IGCMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5BB881C72112E00864DFD /* IGCMenu.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		18E5BB761C7210EC00864DFD /* IGCMenuExampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IGCMenuExampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18E5BB7B1C7210EC00864DFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18E5BB7C1C7210EC00864DFD /* IGCMenuExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGCMenuExampleTests.m; sourceTree = "<group>"; };
+		18E5BB871C72112E00864DFD /* IGCMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGCMenu.h; sourceTree = "<group>"; };
+		18E5BB881C72112E00864DFD /* IGCMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGCMenu.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +84,7 @@
 		18E5BB5F1C7210EC00864DFD /* IGCMenuExample */ = {
 			isa = PBXGroup;
 			children = (
+				18E5BB861C72112E00864DFD /* IGCMenu */,
 				18E5BB641C7210EC00864DFD /* AppDelegate.h */,
 				18E5BB651C7210EC00864DFD /* AppDelegate.m */,
 				18E5BB671C7210EC00864DFD /* ViewController.h */,
@@ -118,6 +122,15 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		18E5BB861C72112E00864DFD /* IGCMenu */ = {
+			isa = PBXGroup;
+			children = (
+				18E5BB871C72112E00864DFD /* IGCMenu.h */,
+				18E5BB881C72112E00864DFD /* IGCMenu.m */,
+			);
+			path = IGCMenu;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -219,6 +232,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E5BB891C72112E00864DFD /* IGCMenu.m in Sources */,
 				18E5BB691C7210EC00864DFD /* ViewController.m in Sources */,
 				18E5BB661C7210EC00864DFD /* AppDelegate.m in Sources */,
 				18E5BB631C7210EC00864DFD /* main.m in Sources */,
