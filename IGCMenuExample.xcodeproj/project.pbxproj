@@ -15,6 +15,14 @@
 		18E5BB711C7210EC00864DFD /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB6F1C7210EC00864DFD /* LaunchScreen.xib */; };
 		18E5BB7D1C7210EC00864DFD /* IGCMenuExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5BB7C1C7210EC00864DFD /* IGCMenuExampleTests.m */; };
 		18E5BB891C72112E00864DFD /* IGCMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E5BB881C72112E00864DFD /* IGCMenu.m */; };
+		18E5BB941C72139200864DFD /* buy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB8B1C72139200864DFD /* buy@3x.png */; };
+		18E5BB951C72139200864DFD /* cross2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB8C1C72139200864DFD /* cross2@3x.png */; };
+		18E5BB961C72139200864DFD /* cross@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB8D1C72139200864DFD /* cross@3x.png */; };
+		18E5BB971C72139200864DFD /* favourite@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB8E1C72139200864DFD /* favourite@3x.png */; };
+		18E5BB981C72139200864DFD /* home@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB8F1C72139200864DFD /* home@3x.png */; };
+		18E5BB9A1C72139200864DFD /* plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB911C72139200864DFD /* plus@3x.png */; };
+		18E5BB9B1C72139200864DFD /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB921C72139200864DFD /* search@3x.png */; };
+		18E5BB9C1C72139200864DFD /* user@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 18E5BB931C72139200864DFD /* user@3x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +51,14 @@
 		18E5BB7C1C7210EC00864DFD /* IGCMenuExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IGCMenuExampleTests.m; sourceTree = "<group>"; };
 		18E5BB871C72112E00864DFD /* IGCMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IGCMenu.h; sourceTree = "<group>"; };
 		18E5BB881C72112E00864DFD /* IGCMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IGCMenu.m; sourceTree = "<group>"; };
+		18E5BB8B1C72139200864DFD /* buy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@3x.png"; sourceTree = "<group>"; };
+		18E5BB8C1C72139200864DFD /* cross2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross2@3x.png"; sourceTree = "<group>"; };
+		18E5BB8D1C72139200864DFD /* cross@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@3x.png"; sourceTree = "<group>"; };
+		18E5BB8E1C72139200864DFD /* favourite@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "favourite@3x.png"; sourceTree = "<group>"; };
+		18E5BB8F1C72139200864DFD /* home@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "home@3x.png"; sourceTree = "<group>"; };
+		18E5BB911C72139200864DFD /* plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@3x.png"; sourceTree = "<group>"; };
+		18E5BB921C72139200864DFD /* search@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@3x.png"; sourceTree = "<group>"; };
+		18E5BB931C72139200864DFD /* user@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@3x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +108,7 @@
 				18E5BB6A1C7210EC00864DFD /* Main.storyboard */,
 				18E5BB6D1C7210EC00864DFD /* Images.xcassets */,
 				18E5BB6F1C7210EC00864DFD /* LaunchScreen.xib */,
+				18E5BB8A1C72139200864DFD /* Images */,
 				18E5BB601C7210EC00864DFD /* Supporting Files */,
 			);
 			path = IGCMenuExample;
@@ -131,6 +148,21 @@
 			);
 			path = IGCMenu;
 			sourceTree = SOURCE_ROOT;
+		};
+		18E5BB8A1C72139200864DFD /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				18E5BB8B1C72139200864DFD /* buy@3x.png */,
+				18E5BB8C1C72139200864DFD /* cross2@3x.png */,
+				18E5BB8D1C72139200864DFD /* cross@3x.png */,
+				18E5BB8E1C72139200864DFD /* favourite@3x.png */,
+				18E5BB8F1C72139200864DFD /* home@3x.png */,
+				18E5BB911C72139200864DFD /* plus@3x.png */,
+				18E5BB921C72139200864DFD /* search@3x.png */,
+				18E5BB931C72139200864DFD /* user@3x.png */,
+			);
+			path = Images;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
@@ -212,9 +244,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18E5BB9C1C72139200864DFD /* user@3x.png in Resources */,
+				18E5BB971C72139200864DFD /* favourite@3x.png in Resources */,
+				18E5BB951C72139200864DFD /* cross2@3x.png in Resources */,
+				18E5BB981C72139200864DFD /* home@3x.png in Resources */,
+				18E5BB941C72139200864DFD /* buy@3x.png in Resources */,
+				18E5BB961C72139200864DFD /* cross@3x.png in Resources */,
 				18E5BB6C1C7210EC00864DFD /* Main.storyboard in Resources */,
 				18E5BB711C7210EC00864DFD /* LaunchScreen.xib in Resources */,
 				18E5BB6E1C7210EC00864DFD /* Images.xcassets in Resources */,
+				18E5BB9B1C72139200864DFD /* search@3x.png in Resources */,
+				18E5BB9A1C72139200864DFD /* plus@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +353,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -351,7 +391,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -432,6 +472,7 @@
 				18E5BB821C7210EC00864DFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		18E5BB831C7210EC00864DFD /* Build configuration list for PBXNativeTarget "IGCMenuExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -440,6 +481,7 @@
 				18E5BB851C7210EC00864DFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

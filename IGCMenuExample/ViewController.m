@@ -12,12 +12,92 @@
 
 @end
 
-@implementation ViewController
+@implementation ViewController{
+    BOOL isMenuActive;
+    IGCMenu *igcMenu;
+
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    isMenuActive = NO;
+    [self setupMenu];
 }
+
+-(void)setupMenu{
+    self.menuButton.clipsToBounds = YES;
+    self.menuButton.layer.cornerRadius = self.menuButton.frame.size.height / 2;
+    //Grid menu setup;
+    if (igcMenu == nil) {
+        igcMenu = [[IGCMenu alloc] init];
+    }
+    igcMenu.disableBackground = YES;
+    igcMenu.numberOfMenuItem = 5;
+    igcMenu.menuButton = self.menuButton;
+    igcMenu.menuSuperView = self.view;
+    igcMenu.menuItemsNameArray = [NSArray arrayWithObjects:@"Home",@"Like",@"Search",@"User",@"Buy",nil];
+    
+    UIColor *homeBackgroundColor = [UIColor colorWithRed:(33/255.0) green:(180/255.0) blue:(227/255.0) alpha:1.0];
+    UIColor *searchBackgroundColor = [UIColor colorWithRed:(139/255.0) green:(116/255.0) blue:(240/255.0) alpha:1.0];
+    UIColor *favoritesBackgroundColor = [UIColor colorWithRed:(241/255.0) green:(118/255.0) blue:(121/255.0) alpha:1.0];
+    UIColor *userBackgroundColor = [UIColor colorWithRed:(184/255.0) green:(204/255.0) blue:(207/255.0) alpha:1.0];
+    UIColor *buyBackgroundColor = [UIColor colorWithRed:(169/255.0) green:(59/255.0) blue:(188/255.0) alpha:1.0];
+    
+    igcMenu.menuBackgroundColorsArray = [NSArray arrayWithObjects:homeBackgroundColor,favoritesBackgroundColor,searchBackgroundColor,userBackgroundColor, buyBackgroundColor,nil];
+    igcMenu.menuImagesNameArray = [NSArray arrayWithObjects:@"home.png",@"favourite.png",@"search.png",@"user.png",@"buy.png",nil];
+    
+    igcMenu.delegate = self;
+}
+- (IBAction)menuButtonPressed:(id)sender {
+    if (isMenuActive) {
+        [self.menuButton setImage:[UIImage imageNamed:@"plus.png"] forState:UIControlStateNormal];
+        if (self.menuTypeSwitch.isOn) {
+            [igcMenu hideGridMenu];
+        }
+        else{
+            [igcMenu hideCircularMenu];
+        }
+        isMenuActive = NO;
+    }
+    else{
+        [self.menuButton setImage:[UIImage imageNamed:@"cross.png"] forState:UIControlStateNormal];
+        if (self.menuTypeSwitch.isOn) {
+            [igcMenu showGridMenu];
+        }
+        else{
+            [igcMenu showCircularMenu];
+        }
+        isMenuActive = YES;
+    }
+}
+
+- (void)igcMenuSelected:(NSString *)selectedMenuName atIndex:(NSInteger)index{
+    NSLog(@"selected menu name = %@ at index = %ld",selectedMenuName,(long)index);
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@ at index %ld is selected",selectedMenuName,(long)index] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
+    [alertView show];
+    
+    switch (index) {
+        case 0:
+            //Perform any action that u want on menu selection
+            break;
+        case 1:
+            
+            break;
+        case 2:
+            
+            break;
+        case 3:
+            
+            break;
+        case 4:
+            
+            break;
+        default:
+            break;
+    }
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
