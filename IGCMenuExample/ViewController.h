@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IGCMenu.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController<IGCMenuDelegate>
 
+@property (weak, nonatomic) IBOutlet UIButton *menuButton;
+@property (weak, nonatomic) IBOutlet UISwitch *menuTypeSwitch;
 
 @end
 
