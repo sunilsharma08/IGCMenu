@@ -1,5 +1,5 @@
 # IGCMenu
-This library gives easy way to create **Grid** and **Circular** menu.Light weight and highly customsiable.
+IGCMenu library gives easy way to create **Grid** and **Circular** menu in app.This is light weight and highly customisable.
 
 <table>
   <tr>
@@ -12,58 +12,109 @@ This library gives easy way to create **Grid** and **Circular** menu.Light weigh
   </tr>
 </table>
 
+#Features
+* Grid Menu
+* Circular Menu
+* Enable/Diable menu background
+* Menu items can be without images/names
+
 
 #How to use
-Drag the folder "IGCMenu" with the source files into your project, and add #import "IGCMenu.h" to the "ViewController.h" that will use it.
-Then create instance variable in ViewController.m file.
 
-```IGCMenu *igcMenu;```
+Drag the folder "IGCMenu" with the source files into your project.
 
-Then create instance of class IGCMenu as follow
+##Import
+ ```objc
+ #import "IGCMenu.h"
+ ```
+ 
+##Conform Protocol
+ **Optional** if you don't want to get notify for menu items selection then skip this step.
+ 
+ Conform to IGCMenuDelegate
+ 
+ ```objc
+ @interface ViewController : UIViewController<IGCMenuDelegate>
+ ```
+ 
+##Create Instance Variable
 
+Create instance variable of type IGCMenu.
+
+```objc
+@implementation ViewController{
+    IGCMenu *igcMenu;
+}
 ```
+##Create instance of class IGCMenu and configure attributes
+
+```objc
 if (igcMenu == nil) {
-        igcMenu = [[IGCMenu alloc] init];
-    }
-    igcMenu.disableBackground = YES;
-    igcMenu.numberOfMenuItem = 5;
+      igcMenu = [[IGCMenu alloc] init];
+  }
+  igcMenu.menuButton = self.menuButton;   //Pass refernce of menu button
+  igcMenu.menuSuperView = self.view;      //Pass reference of menu button super view
+  igcMenu.disableBackground = YES;        //Enable/disable menu background
+  igcMenu.numberOfMenuItem = 5;           //Number of menu items to display
 
-    igcMenu.menuButton = self.menuButton;
-
-    igcMenu.menuSuperView = self.view;
-
-    igcMenu.menuItemsNameArray = [NSArray arrayWithObjects:@"Home",@"Like",@"Search",@"User",@"Buy",nil];
-    UIColor *homeBackgroundColor = [UIColor colorWithRed:(33/255.0) green:(180/255.0) blue:(227/255.0) alpha:1.0];
-    UIColor *searchBackgroundColor = [UIColor colorWithRed:(139/255.0) green:(116/255.0) blue:(240/255.0) alpha:1.0];
-    UIColor *favoritesBackgroundColor = [UIColor colorWithRed:(241/255.0) green:(118/255.0) blue:(121/255.0) alpha:1.0];
-    UIColor *userBackgroundColor = [UIColor colorWithRed:(184/255.0) green:(204/255.0) blue:(207/255.0) alpha:1.0];
-    UIColor *buyBackgroundColor = [UIColor colorWithRed:(169/255.0) green:(59/255.0) blue:(188/255.0) alpha:1.0];
-    igcMenu.menuBackgroundColorsArray = [NSArray arrayWithObjects:homeBackgroundColor,favoritesBackgroundColor,searchBackgroundColor,userBackgroundColor, buyBackgroundColor,nil];
-
-    igcMenu.menuImagesNameArray = [NSArray arrayWithObjects:@"home.png",@"favourite.png",@"search.png",@"user.png",@"buy.png",nil];
-
-    igcMenu.delegate = self;
-  ```
+/* Optional
+Pass name of menu items
+**/
+  igcMenu.menuItemsNameArray = [NSArray arrayWithObjects:@"Home",@"Like",@"Search",@"User",@"Buy",nil];
   
-#Customisation
+/*Optional
+Pass color of menu items
+**/
+UIColor *homeBackgroundColor = [UIColor colorWithRed:(33/255.0) green:(180/255.0) blue:(227/255.0) alpha:1.0];
+UIColor *searchBackgroundColor = [UIColor colorWithRed:(139/255.0) green:(116/255.0) blue:(240/255.0) alpha:1.0];
+UIColor *favoritesBackgroundColor = [UIColor colorWithRed:(241/255.0) green:(118/255.0) blue:(121/255.0) alpha:1.0];
+UIColor *userBackgroundColor = [UIColor colorWithRed:(184/255.0) green:(204/255.0) blue:(207/255.0) alpha:1.0];
+UIColor *buyBackgroundColor = [UIColor colorWithRed:(169/255.0) green:(59/255.0) blue:(188/255.0) alpha:1.0];
+igcMenu.menuBackgroundColorsArray = [NSArray arrayWithObjects:homeBackgroundColor,favoritesBackgroundColor,searchBackgroundColor,userBackgroundColor, buyBackgroundColor,nil];
+
+/*Optional
+Pass menu items icons
+**/
+igcMenu.menuImagesNameArray = [NSArray arrayWithObjects:@"home.png",@"favourite.png",@"search.png",@"user.png",@"buy.png",nil];
+
+/*Optional if you don't want to get notify for menu items selection
+conform delegate
+**/
+igcMenu.delegate = self;
 ```
+Array of name,color and icons will appear in the same order.
+
+##Show/Hide menu
+
+To show/hide **circular menu**
+```objc
+[igcMenu showCircularMenu];  //Show circular menu
+[igcMenu hideCircularMenu];  //Hide circular menu
+```
+To show/hide **grid menu**
+```objc
+[igcMenu showGridMenu];     //Show grid menu
+[igcMenu hideGridMenu];     //Hide grid menu
+```
+
+#Customisation
+```objc
 @property (nonatomic) NSInteger numberOfMenuItem;   //Number of menu items to show
 @property (nonatomic) CGFloat menuRadius;           //Radius for circular menu
 @property (weak,nonatomic) UIButton *menuButton;    //Menu button reference
-@property (weak,nonatomic) UIView *menuSuperView;
-@property (strong,nonatomic) NSArray *menuItemsNameArray;  //menu items name array,it can be empty
-@property (strong,nonatomic) NSArray *menuBackgroundColorsArray; // menu items background color,it can be empty, default color is white
-@property (strong,nonatomic) NSArray *menuImagesNameArray;   //menu item icon array it can be empty
-@property (nonatomic) BOOL disableBackground;       //Disable background view, default is
+@property (weak,nonatomic) UIView *menuSuperView;   //Menu button super view reference
+@property (strong,nonatomic) NSArray *menuItemsNameArray;        //Menu items name array,it can be empty
+@property (strong,nonatomic) NSArray *menuBackgroundColorsArray; //Menu items background color,it can be empty, default color is white
+@property (strong,nonatomic) NSArray *menuImagesNameArray;       //Menu item icons array it can be empty
+@property (nonatomic) BOOL disableBackground;       //Disable background view, default is TRUE
 @property int maxColumn;                            //Maximium number of column,default is 3
-@property int menuHeight;                       //height = width ,default is 65
-
+@property int menuHeight;                           //height = width ,default is 65
 
 ```
 
 #Let us know!
 
-We’d be really happy if you sent us links to your projects where you use our component. Just send an email to sunilsharma.ss08@gmail.com And do let us know if you have any questions or suggestion regarding anything.
+We will be happy if you sent us links to your projects where you use our library. And do let us know if you have any questions or suggestion regarding anything.
 
 #License
 IGCMenu is available under the [MIT license](https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/LICENSE.md).
