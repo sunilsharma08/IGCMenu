@@ -86,6 +86,7 @@ Array of name,color and icons will appear in the same order.
 
 ##Show/Hide menu
 
+On menu button press you can show/hide menu items by calling methods below.
 To show/hide **circular menu**
 ```objc
 [igcMenu showCircularMenu];  //Show circular menu
@@ -96,6 +97,15 @@ To show/hide **grid menu**
 [igcMenu showGridMenu];     //Show grid menu
 [igcMenu hideGridMenu];     //Hide grid menu
 ```
+
+##Delegate Implementation
+To get notify about menu item selection you must implement this method.
+```objc
+- (void)igcMenuSelected:(NSString *)selectedMenuName atIndex:(NSInteger)index{
+//Perform any action on selection of menu item
+}
+```
+On selecting any menu item it gives selected menu item name(if present otherwise nil) and index of menu item.Index of menu item start from 0.
 
 #Customisation
 ```objc
@@ -110,6 +120,14 @@ To show/hide **grid menu**
 @property int maxColumn;                            //Maximium number of column,default is 3
 @property int menuHeight;                           //height = width ,default is 65
 
+```
+#Note
+This library does not customise menu button(in example at bottom in dark blue background color) like making round,setting background color,changing icon like + and x.
+This is left on you to customise.You can take refernce form example if any help needed.
+Code to make button circle is:
+```objc
+self.menuButton.clipsToBounds = YES;
+self.menuButton.layer.cornerRadius = self.menuButton.frame.size.height/2;
 ```
 
 #Let us know!
