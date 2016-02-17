@@ -1,5 +1,7 @@
 # IGCMenu
-IGCMenu library gives easy way to create **Grid** and **Circular** menu in app.This is light weight and highly customisable.
+IGCMenu library gives easy way to create **Grid** and **Circular** menu in app.
+
+This is light weight and highly customisable.
 
 <table>
   <tr>
@@ -87,6 +89,7 @@ Array of name,color and icons will appear in the same order.
 ##Show/Hide menu
 
 On menu button press you can show/hide menu items by calling methods below.
+
 To show/hide **circular menu**
 ```objc
 [igcMenu showCircularMenu];  //Show circular menu
