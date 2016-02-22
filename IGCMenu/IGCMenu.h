@@ -23,13 +23,13 @@
 @property (nonatomic) NSInteger numberOfMenuItem;   //Number of menu items to show
 @property (nonatomic) CGFloat menuRadius;           //Radius for circular menu
 @property (weak,nonatomic) UIButton *menuButton;    //Menu button reference
-@property (weak,nonatomic) UIView *menuSuperView;
-@property (strong,nonatomic) NSArray *menuItemsNameArray;  //menu items name array,it can be empty
-@property (strong,nonatomic) NSArray *menuBackgroundColorsArray; // menu items background color,it can be empty, default color is white
-@property (strong,nonatomic) NSArray *menuImagesNameArray;   //menu item icon array it can be empty
-@property (nonatomic) BOOL disableBackground;       //Disable background view, default is
+@property (weak,nonatomic) UIView *menuSuperView;   //Menu button super view reference
+@property (strong,nonatomic) NSArray *menuItemsNameArray;        //Menu items name array,it can be empty
+@property (strong,nonatomic) NSArray *menuBackgroundColorsArray; //Menu items background color,it can be empty, default color is white
+@property (strong,nonatomic) NSArray *menuImagesNameArray;       //Menu item icons array it can be empty
+@property (nonatomic) BOOL disableBackground;       //Disable background view, default is TRUE
 @property int maxColumn;                            //Maximium number of column,default is 3
-@property int menuHeight;                       //height = width ,default is 65
+@property int menuHeight;                           //height = width ,default is 65
 
 -(void)showCircularMenu;
 -(void)hideCircularMenu;
