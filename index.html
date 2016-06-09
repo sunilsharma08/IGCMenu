@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>IGCMenu by sunilsharma08</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">IGCMenu</h1>
+      <h2 class="project-tagline">Grid and Circular Menu for iOS</h2>
+      <a href="https://github.com/sunilsharma08/IGCMenu" class="btn">View on GitHub</a>
+      <a href="https://github.com/sunilsharma08/IGCMenu/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/sunilsharma08/IGCMenu/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="igcmenu" class="anchor" href="#igcmenu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>IGCMenu</h1>
+
+<p>IGCMenu library gives easy way to create <strong>Grid</strong> and <strong>Circular</strong> menu in app.</p>
+
+<p>This is light weight and highly customisable menu.Support iOS 7 and above.</p>
+
+<table>
+  <tr>
+    <th>Grid Menu</th>
+    <th>Circular Menu</th>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/Grid_Menu_Demo.gif" alt="Grid Menu" width="320" height="568"></td>
+    <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/Circular_Menu_Demo.gif" alt="Circular Menu" width="320" height="568"></td>
+  </tr>
+</table>
+
+<h1>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features</h1>
+
+<ul>
+<li>Grid Menu</li>
+<li>Circular Menu</li>
+<li>Enable/Diable menu background</li>
+<li>Menu items can be without images/names</li>
+</ul>
+
+<h1>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use</h1>
+
+<p>Drag the folder "IGCMenu" with the source files into your project.</p>
+
+<h2>
+<a id="import" class="anchor" href="#import" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Import</h2>
+
+<div class="highlight highlight-source-objc"><pre> #<span class="pl-k">import</span> <span class="pl-s"><span class="pl-pds">"</span>IGCMenu.h<span class="pl-pds">"</span></span></pre></div>
+
+<h2>
+<a id="conform-protocol" class="anchor" href="#conform-protocol" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Conform Protocol</h2>
+
+<p><strong>Optional</strong> if you don't want to get notify for menu items selection then skip this step.</p>
+
+<p>Conform to IGCMenuDelegate</p>
+
+<div class="highlight highlight-source-objc"><pre> <span class="pl-k">@interface</span> <span class="pl-en">ViewController</span> : <span class="pl-e">UIViewController</span>&lt;IGCMenuDelegate&gt;</pre></div>
+
+<h2>
+<a id="create-instance-variable" class="anchor" href="#create-instance-variable" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create Instance Variable</h2>
+
+<p>Create instance variable of type IGCMenu.</p>
+
+<div class="highlight highlight-source-objc"><pre><span class="pl-k">@implementation</span> <span class="pl-en">ViewController</span>{
+    IGCMenu *igcMenu;
+}</pre></div>
+
+<h2>
+<a id="create-instance-of-class-igcmenu-and-configure-attributes" class="anchor" href="#create-instance-of-class-igcmenu-and-configure-attributes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Create instance of class IGCMenu and configure attributes</h2>
+
+<div class="highlight highlight-source-objc"><pre><span class="pl-k">if</span> (igcMenu == <span class="pl-c1">nil</span>) {
+      igcMenu = [[IGCMenu <span class="pl-c1">alloc</span>] <span class="pl-c1">init</span>];
+  }
+  igcMenu.menuButton = self.menuButton;   <span class="pl-c">//Pass refernce of menu button</span>
+  igcMenu.menuSuperView = self.view;      <span class="pl-c">//Pass reference of menu button super view</span>
+  igcMenu.disableBackground = <span class="pl-c1">YES</span>;        <span class="pl-c">//Enable/disable menu background</span>
+  igcMenu.numberOfMenuItem = <span class="pl-c1">5</span>;           <span class="pl-c">//Number of menu items to display</span>
+
+<span class="pl-c">/* Optional</span>
+<span class="pl-c">Pass name of menu items</span>
+<span class="pl-c">**/</span>
+  igcMenu.menuItemsNameArray = [<span class="pl-c1">NSArray</span> <span class="pl-c1">arrayWithObjects:</span><span class="pl-s"><span class="pl-pds">@"</span>Home<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>Like<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>Search<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>User<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>Buy<span class="pl-pds">"</span></span>,<span class="pl-c1">nil</span>];
+
+<span class="pl-c">/*Optional</span>
+<span class="pl-c">Pass color of menu items</span>
+<span class="pl-c">**/</span>
+UIColor *homeBackgroundColor = [UIColor <span class="pl-c1">colorWithRed:</span>(<span class="pl-c1">33</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">green:</span>(<span class="pl-c1">180</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">blue:</span>(<span class="pl-c1">227</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">alpha:</span><span class="pl-c1">1.0</span>];
+UIColor *searchBackgroundColor = [UIColor <span class="pl-c1">colorWithRed:</span>(<span class="pl-c1">139</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">green:</span>(<span class="pl-c1">116</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">blue:</span>(<span class="pl-c1">240</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">alpha:</span><span class="pl-c1">1.0</span>];
+UIColor *favoritesBackgroundColor = [UIColor <span class="pl-c1">colorWithRed:</span>(<span class="pl-c1">241</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">green:</span>(<span class="pl-c1">118</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">blue:</span>(<span class="pl-c1">121</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">alpha:</span><span class="pl-c1">1.0</span>];
+UIColor *userBackgroundColor = [UIColor <span class="pl-c1">colorWithRed:</span>(<span class="pl-c1">184</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">green:</span>(<span class="pl-c1">204</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">blue:</span>(<span class="pl-c1">207</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">alpha:</span><span class="pl-c1">1.0</span>];
+UIColor *buyBackgroundColor = [UIColor <span class="pl-c1">colorWithRed:</span>(<span class="pl-c1">169</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">green:</span>(<span class="pl-c1">59</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">blue:</span>(<span class="pl-c1">188</span>/<span class="pl-c1">255.0</span>) <span class="pl-c1">alpha:</span><span class="pl-c1">1.0</span>];
+igcMenu.menuBackgroundColorsArray = [<span class="pl-c1">NSArray</span> <span class="pl-c1">arrayWithObjects:</span>homeBackgroundColor,favoritesBackgroundColor,searchBackgroundColor,userBackgroundColor, buyBackgroundColor,<span class="pl-c1">nil</span>];
+
+<span class="pl-c">/*Optional</span>
+<span class="pl-c">Pass menu items icons</span>
+<span class="pl-c">**/</span>
+igcMenu.menuImagesNameArray = [<span class="pl-c1">NSArray</span> <span class="pl-c1">arrayWithObjects:</span><span class="pl-s"><span class="pl-pds">@"</span>home.png<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>favourite.png<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>search.png<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>user.png<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">@"</span>buy.png<span class="pl-pds">"</span></span>,<span class="pl-c1">nil</span>];
+
+<span class="pl-c">/*Optional if you don't want to get notify for menu items selection</span>
+<span class="pl-c">conform delegate</span>
+<span class="pl-c">**/</span>
+igcMenu.delegate = self;</pre></div>
+
+<p>Array of name,color and icons will appear in the same order.</p>
+
+<h2>
+<a id="showhide-menu" class="anchor" href="#showhide-menu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Show/Hide menu</h2>
+
+<p>On menu button press you can show/hide menu items by calling methods below.</p>
+
+<p>To show/hide <strong>circular menu</strong></p>
+
+<div class="highlight highlight-source-objc"><pre>[igcMenu <span class="pl-c1">showCircularMenu</span>];  <span class="pl-c">//Show circular menu</span>
+[igcMenu <span class="pl-c1">hideCircularMenu</span>];  <span class="pl-c">//Hide circular menu</span></pre></div>
+
+<p>To show/hide <strong>grid menu</strong></p>
+
+<div class="highlight highlight-source-objc"><pre>[igcMenu <span class="pl-c1">showGridMenu</span>];     <span class="pl-c">//Show grid menu</span>
+[igcMenu <span class="pl-c1">hideGridMenu</span>];     <span class="pl-c">//Hide grid menu</span></pre></div>
+
+<h2>
+<a id="delegate-implementation" class="anchor" href="#delegate-implementation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Delegate Implementation</h2>
+
+<p>To get notify about menu item selection you must implement this method.</p>
+
+<div class="highlight highlight-source-objc"><pre>- (<span class="pl-k">void</span>)igcMenuSelected:(<span class="pl-c1">NSString</span> *)selectedMenuName atIndex:(<span class="pl-k">NSInteger</span>)index{
+<span class="pl-c">//Perform any action on selection of menu item</span>
+}</pre></div>
+
+<p>On selecting any menu item it gives selected menu item name(if present otherwise nil) and index of menu item.Index of menu item start from 0.</p>
+
+<h1>
+<a id="customisation" class="anchor" href="#customisation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Customisation</h1>
+
+<div class="highlight highlight-source-objc"><pre>@property (nonatomic) <span class="pl-k">NSInteger</span> numberOfMenuItem;   <span class="pl-c">//Number of menu items to show</span>
+@property (nonatomic) <span class="pl-c1">CGFloat</span> menuRadius;           <span class="pl-c">//Radius for circular menu</span>
+@property (weak,nonatomic) UIButton *menuButton;    <span class="pl-c">//Menu button reference</span>
+@property (weak,nonatomic) UIView *menuSuperView;   <span class="pl-c">//Menu button super view reference</span>
+@property (strong,nonatomic) <span class="pl-c1">NSArray</span> *menuItemsNameArray;        <span class="pl-c">//Menu items name array,it can be empty</span>
+@property (strong,nonatomic) <span class="pl-c1">NSArray</span> *menuBackgroundColorsArray; <span class="pl-c">//Menu items background color,it can be empty, default color is white</span>
+@property (strong,nonatomic) <span class="pl-c1">NSArray</span> *menuImagesNameArray;       <span class="pl-c">//Menu item icons array it can be empty</span>
+@property (nonatomic) <span class="pl-k">BOOL</span> disableBackground;       <span class="pl-c">//Disable background view, default is TRUE</span>
+@property <span class="pl-k">int</span> maxColumn;                            <span class="pl-c">//Maximium number of column,default is 3</span>
+@property <span class="pl-k">int</span> menuHeight;                           <span class="pl-c">//height = width ,default is 65</span>
+</pre></div>
+
+<h1>
+<a id="note" class="anchor" href="#note" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Note</h1>
+
+<p>This library does not customise menu button(in example at bottom in dark blue background color) like making round,setting background color,changing icon like + and x.
+This is left on you to customise.You can take refernce form example if any help needed.
+Code to make button circle is:</p>
+
+<div class="highlight highlight-source-objc"><pre>self.menuButton.clipsToBounds = <span class="pl-c1">YES</span>;
+self.menuButton.layer.cornerRadius = self.menuButton.frame.size.height/<span class="pl-c1">2</span>;</pre></div>
+
+<h1>
+<a id="let-us-know" class="anchor" href="#let-us-know" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Let us know!</h1>
+
+<p>We will be happy if you sent us links to your projects where you use our library. And do let us know if you have any questions or suggestion regarding anything.</p>
+
+<h1>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h1>
+
+<p>IGCMenu is available under the <a href="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/LICENSE.md">MIT license</a>.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/sunilsharma08/IGCMenu">IGCMenu</a> is maintained by <a href="https://github.com/sunilsharma08">sunilsharma08</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
