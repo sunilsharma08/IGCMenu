@@ -110,7 +110,7 @@ To get notify about menu item selection you must implement this method.
 ```
 On selecting any menu item it gives selected menu item name(if present otherwise nil) and index of menu item.Index of menu item start from 0.
 
-#Customisation
+#Customisations
 ```objc
 @property (nonatomic) NSInteger numberOfMenuItem;   //Number of menu items to show
 @property (nonatomic) CGFloat menuRadius;           //Radius for circular menu
