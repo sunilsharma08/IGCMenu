@@ -10,5 +10,5 @@ This is light weight and highly customisable menu.Support iOS 7 and above."
   s.platform     = :ios, "8.0"
   s.source       = { :git => "https://github.com/sunilsharma08/IGCMenu.git", :tag => "#{s.version}" }
   s.source_files  = "IGCMenu/**/*.{h,m}"
-
+  s.requires_arc = true
 end
