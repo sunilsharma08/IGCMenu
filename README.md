@@ -14,23 +14,41 @@ This is light weight and highly customisable menu.Support iOS 7 and above.
   </tr>
 </table>
 
-#Features
+# Features
 * Grid Menu
 * Circular Menu
 * Enable/Diable menu background
 * Menu items can be without images/names
 
+# Installation
 
-#How to use
+## Installation with CocoaPods
+You can use [CocoaPods](http://cocoapods.org/) to install `IGCMenu` by adding it to your `Podfile`:
+
+```Ruby
+platform :ios, '8.0'
+
+target 'TargetName' do
+pod 'IGCMenu'
+end
+```
+Then, run the following command:
+
+```Ruby
+$ pod install
+```
+## Manually
 
 Drag the folder "IGCMenu" with the source files into your project.
 
-##Import
+# How to use
+
+## Import
  ```objc
  #import "IGCMenu.h"
  ```
  
-##Conform Protocol
+## Conform Protocol
  **Optional** if you don't want to get notify for menu items selection then skip this step.
  
  Conform to IGCMenuDelegate
@@ -39,7 +57,7 @@ Drag the folder "IGCMenu" with the source files into your project.
  @interface ViewController : UIViewController<IGCMenuDelegate>
  ```
  
-##Create Instance Variable
+## Create Instance Variable
 
 Create instance variable of type IGCMenu.
 
@@ -48,7 +66,7 @@ Create instance variable of type IGCMenu.
     IGCMenu *igcMenu;
 }
 ```
-##Create instance of class IGCMenu and configure attributes
+## Create instance of class IGCMenu and configure attributes
 
 ```objc
 if (igcMenu == nil) {
@@ -86,7 +104,7 @@ igcMenu.delegate = self;
 ```
 Array of name,color and icons will appear in the same order.
 
-##Show/Hide menu
+## Show/Hide menu
 
 On menu button press you can show/hide menu items by calling methods below.
 
@@ -101,7 +119,7 @@ To show/hide **grid menu**
 [igcMenu hideGridMenu];     //Hide grid menu
 ```
 
-##Delegate Implementation
+## Delegate Implementation
 To get notify about menu item selection you must implement this method.
 ```objc
 - (void)igcMenuSelected:(NSString *)selectedMenuName atIndex:(NSInteger)index{
@@ -110,7 +128,7 @@ To get notify about menu item selection you must implement this method.
 ```
 On selecting any menu item it gives selected menu item name(if present otherwise nil) and index of menu item.Index of menu item start from 0.
 
-#Customisations
+# Customisations
 ```objc
 @property (nonatomic) NSInteger numberOfMenuItem;   //Number of menu items to show
 @property (nonatomic) CGFloat menuRadius;           //Radius for circular menu
@@ -124,7 +142,7 @@ On selecting any menu item it gives selected menu item name(if present otherwise
 @property int menuHeight;                           //height = width ,default is 65
 
 ```
-#Note
+# Note
 This library does not customise menu button(in example at bottom in dark blue background color) like making round,setting background color,changing icon like + and x.
 This is left on you to customise.You can take refernce form example if any help needed.
 Code to make button circle is:
@@ -133,9 +151,9 @@ self.menuButton.clipsToBounds = YES;
 self.menuButton.layer.cornerRadius = self.menuButton.frame.size.height/2;
 ```
 
-#Let us know!
+# Let us know!
 
 We will be happy if you sent us links to your projects where you use our library. And do let us know if you have any questions or suggestion regarding anything.
 
-#License
+# License
 IGCMenu is available under the [MIT license](https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/LICENSE.md).
