@@ -68,6 +68,10 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pZ3-ue-1uZ" secondAttribute="bottom" constant="20" id="zQ5-Y9-jR5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="menuButton" destination="pZ3-ue-1uZ" id="pIU-qx-f28"/>
+                        <outlet property="menuTypeSwitch" destination="WEl-vh-Ufd" id="2JF-1R-wzy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
