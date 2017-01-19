@@ -14,6 +14,7 @@
 		18EBC6FC1E2ABF550050125D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18EBC6FA1E2ABF550050125D /* LaunchScreen.storyboard */; };
 		18EBC7071E2ABF560050125D /* IGCMenuSwiftExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBC7061E2ABF560050125D /* IGCMenuSwiftExampleTests.swift */; };
 		18EBC7121E2ABF560050125D /* IGCMenuSwiftExampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EBC7111E2ABF560050125D /* IGCMenuSwiftExampleUITests.swift */; };
+		D9BC1B241E30D9D80090B02A /* IGCMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9BC1B231E30D9D80090B02A /* IGCMenu.swift */; };
 		D9FAA6AE1E2E4D2D006288FF /* buy@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FAA6A61E2E4D2D006288FF /* buy@3x.png */; };
 		D9FAA6AF1E2E4D2D006288FF /* cross2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FAA6A71E2E4D2D006288FF /* cross2@3x.png */; };
 		D9FAA6B01E2E4D2D006288FF /* cross@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FAA6A81E2E4D2D006288FF /* cross@3x.png */; };
@@ -22,7 +23,6 @@
 		D9FAA6B31E2E4D2D006288FF /* plus@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FAA6AB1E2E4D2D006288FF /* plus@3x.png */; };
 		D9FAA6B41E2E4D2D006288FF /* search@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FAA6AC1E2E4D2D006288FF /* search@3x.png */; };
 		D9FAA6B51E2E4D2D006288FF /* user@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = D9FAA6AD1E2E4D2D006288FF /* user@3x.png */; };
-		D9FAA6B81E2E53AC006288FF /* IGCMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D9FAA6B71E2E53AC006288FF /* IGCMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +56,7 @@
 		18EBC70D1E2ABF560050125D /* IGCMenuSwiftExampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IGCMenuSwiftExampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18EBC7111E2ABF560050125D /* IGCMenuSwiftExampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IGCMenuSwiftExampleUITests.swift; sourceTree = "<group>"; };
 		18EBC7131E2ABF560050125D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D9BC1B231E30D9D80090B02A /* IGCMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCMenu.swift; sourceTree = "<group>"; };
 		D9FAA6A61E2E4D2D006288FF /* buy@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "buy@3x.png"; sourceTree = "<group>"; };
 		D9FAA6A71E2E4D2D006288FF /* cross2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross2@3x.png"; sourceTree = "<group>"; };
 		D9FAA6A81E2E4D2D006288FF /* cross@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cross@3x.png"; sourceTree = "<group>"; };
@@ -64,7 +65,6 @@
 		D9FAA6AB1E2E4D2D006288FF /* plus@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus@3x.png"; sourceTree = "<group>"; };
 		D9FAA6AC1E2E4D2D006288FF /* search@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@3x.png"; sourceTree = "<group>"; };
 		D9FAA6AD1E2E4D2D006288FF /* user@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user@3x.png"; sourceTree = "<group>"; };
-		D9FAA6B71E2E53AC006288FF /* IGCMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IGCMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,7 @@
 		18EBC6E51E2ABF550050125D = {
 			isa = PBXGroup;
 			children = (
-				D9FAA6B61E2E53AC006288FF /* IGCMenu */,
+				D9BC1B221E30D9D80090B02A /* IGCMenu */,
 				18EBC6F01E2ABF550050125D /* IGCMenuSwiftExample */,
 				18EBC7051E2ABF560050125D /* IGCMenuSwiftExampleTests */,
 				18EBC7101E2ABF560050125D /* IGCMenuSwiftExampleUITests */,
@@ -145,6 +145,14 @@
 			path = IGCMenuSwiftExampleUITests;
 			sourceTree = "<group>";
 		};
+		D9BC1B221E30D9D80090B02A /* IGCMenu */ = {
+			isa = PBXGroup;
+			children = (
+				D9BC1B231E30D9D80090B02A /* IGCMenu.swift */,
+			);
+			path = IGCMenu;
+			sourceTree = "<group>";
+		};
 		D9FAA6A51E2E4D2D006288FF /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -158,15 +166,6 @@
 				D9FAA6AD1E2E4D2D006288FF /* user@3x.png */,
 			);
 			path = Images;
-			sourceTree = "<group>";
-		};
-		D9FAA6B61E2E53AC006288FF /* IGCMenu */ = {
-			isa = PBXGroup;
-			children = (
-				D9FAA6B71E2E53AC006288FF /* IGCMenu.swift */,
-			);
-			name = IGCMenu;
-			path = IGCMenuSwiftExample/IGCMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -311,7 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D9FAA6B81E2E53AC006288FF /* IGCMenu.swift in Sources */,
+				D9BC1B241E30D9D80090B02A /* IGCMenu.swift in Sources */,
 				18EBC6F41E2ABF550050125D /* ViewController.swift in Sources */,
 				18EBC6F21E2ABF550050125D /* AppDelegate.swift in Sources */,
 			);
