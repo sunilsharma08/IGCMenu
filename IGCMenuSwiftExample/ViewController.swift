@@ -26,23 +26,38 @@ class ViewController: UIViewController, IGCMenuDelegate {
         self.menuButton.clipsToBounds = true
         self.menuButton.layer.cornerRadius = self.menuButton.frame.size.height / 2
         
+        //Grid menu setup
         if igcMenu == nil{
             igcMenu = IGCMenu()
         }
-        igcMenu?.menuButton = self.menuButton
-        igcMenu?.menuSuperView = self.view
-        igcMenu?.disableBackground = true
-        igcMenu?.numberOfMenuItem = 5
+        igcMenu?.menuButton = self.menuButton   //Grid menu setup
+        igcMenu?.menuSuperView = self.view      //Pass reference of menu button super view
+        igcMenu?.disableBackground = true       //Enable/disable menu background
+        igcMenu?.numberOfMenuItem = 5           //Number of menu items to display
         
-        //Optional
+        /* Optional
+         Pass name of menu items
+         **/
         igcMenu?.menuItemsNameArray = ["Home", "Like", "Search", "User", "Buy"]
+        
+        /*Optional
+         Pass color of menu items
+         **/
         let homeBackgroundColor = UIColor(colorLiteralRed: (33/255.0), green: (180/255.0), blue: (227/255.0), alpha: 1.0)
         let searchBackgroundColor = UIColor(colorLiteralRed: (139/255.0), green: (116/255.0), blue: (240/255.0), alpha: 1.0)
         let favoritesBackgroundColor = UIColor(colorLiteralRed: (241/255.0), green: (118/255.0), blue: (121/255.0), alpha: 1.0)
         let userBackgroundColor = UIColor(colorLiteralRed: (184/255.0), green: (204/255.0), blue: (207/255.0), alpha: 1.0)
         let buyBackgroundColor = UIColor(colorLiteralRed: (169/255.0), green: (59/255.0), blue: (188/255.0), alpha: 1.0)
         igcMenu?.menuBackgroundColorsArray = [homeBackgroundColor, searchBackgroundColor, favoritesBackgroundColor, userBackgroundColor, buyBackgroundColor]
+        
+        /*Optional
+         Pass menu items icons
+         **/
         igcMenu?.menuImagesNameArray = ["home.png", "favourite.png", "search.png", "user.png", "buy.png"]
+        
+        /*Optional if you don't want to get notify for menu items selection
+         conform delegate
+         **/
         igcMenu?.delegate = self
     }
     
@@ -64,7 +79,19 @@ class ViewController: UIViewController, IGCMenuDelegate {
         
         switch index {
         case 0:
-            //perform any action
+            //Perform any action that u want on menu selection
+            break
+        case 1:
+            
+            break
+        case 2:
+            
+            break
+        case 3:
+            
+            break
+        case 4:
+            
             break
         default:
             break

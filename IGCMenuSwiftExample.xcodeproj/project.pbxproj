@@ -95,6 +95,7 @@
 		18EBC6E51E2ABF550050125D = {
 			isa = PBXGroup;
 			children = (
+				D9FAA6B61E2E53AC006288FF /* IGCMenu */,
 				18EBC6F01E2ABF550050125D /* IGCMenuSwiftExample */,
 				18EBC7051E2ABF560050125D /* IGCMenuSwiftExampleTests */,
 				18EBC7101E2ABF560050125D /* IGCMenuSwiftExampleUITests */,
@@ -115,7 +116,6 @@
 		18EBC6F01E2ABF550050125D /* IGCMenuSwiftExample */ = {
 			isa = PBXGroup;
 			children = (
-				D9FAA6B61E2E53AC006288FF /* IGCMenu */,
 				D9FAA6A51E2E4D2D006288FF /* Images */,
 				18EBC6F11E2ABF550050125D /* AppDelegate.swift */,
 				18EBC6F31E2ABF550050125D /* ViewController.swift */,
@@ -165,7 +165,8 @@
 			children = (
 				D9FAA6B71E2E53AC006288FF /* IGCMenu.swift */,
 			);
-			path = IGCMenu;
+			name = IGCMenu;
+			path = IGCMenuSwiftExample/IGCMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

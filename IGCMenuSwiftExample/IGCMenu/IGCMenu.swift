@@ -12,7 +12,6 @@ import QuartzCore
 
 
 @objc protocol IGCMenuDelegate {
-    //check syntax
     @objc optional func igcMenuSelected(selectedMenuName: String, atIndex index: Int)
 }
 
@@ -22,19 +21,19 @@ class IGCMenu : NSObject{
     private let MENU_BACKGROUND_VIEW_TAG = 6200
     
     weak var delegate: IGCMenuDelegate?
-    var numberOfMenuItem: Int = 0
-    var menuRadius: CGFloat = 120
-    weak var menuButton: UIButton?
-    weak var menuSuperView: UIView?
-    var menuItemsNameArray: [String]?
-    var menuBackgroundColorsArray: [UIColor]?
-    var menuImagesNameArray: [String]?
+    var numberOfMenuItem: Int = 0           //Number of menu items to show
+    var menuRadius: CGFloat = 120           //Radius for circular menu
+    weak var menuButton: UIButton?          //Menu button reference
+    weak var menuSuperView: UIView?         //Menu button super view reference
+    var menuItemsNameArray: [String]?           //Menu items name array,it can be empty
+    var menuBackgroundColorsArray: [UIColor]?   //Menu items background color,it can be empty, default color is white
+    var menuImagesNameArray: [String]?          //Menu item icons array it can be empty
     var disableBackground = true            //Disable background view, default is TRUE
     var maxColumn = 3                       //Maximium number of column,default is 3
     var menuHeight = 65                     //height = width ,default is 65
     
     private var menuButtonArray = [UIButton]()      //array of menu buttons
-    private var menuNameLabelArray = [UILabel]()     //array of menu name label
+    private var menuNameLabelArray = [UILabel]()    //array of menu name label
     private var pMenuButtonSuperView: UIView!
     
     private func menuStartTag(offset: Int) -> Int{
@@ -149,7 +148,6 @@ class IGCMenu : NSObject{
         var i = 1
         while i < (menuButtonArray.count * 2) {
             let angle: CGFloat = CGFloat(M_PI) / CGFloat(menuButtonArray.count * 2)
-            print("angle: \(angle)")
             UIView.animate(withDuration: ANIMATION_DURATION, delay: 0, options: .curveEaseInOut, animations: {
                 self.pMenuButtonSuperView.layer.opacity = 1.0
                 let menuButton = self.menuButtonArray[i/2]
@@ -159,15 +157,12 @@ class IGCMenu : NSObject{
                     let centerX: CGFloat = selfMenuButton.center.x - self.menuRadius * cos(angle * CGFloat(i))
                     let centerY: CGFloat = selfMenuButton.center.y - self.menuRadius * sin(angle * CGFloat(i))
                     menuButton.center = CGPoint(x: centerX, y: centerY)
-                    print("menuButton center: \(menuButton.center)")
                 }
                 
                 if  self.menuNameLabelArray.count > (i/2){
                     let menuNameLabel = self.menuNameLabelArray[i/2]
                     menuNameLabel.layer.opacity = 1.0
                     menuNameLabel.center = CGPoint(x: menuButton.center.x, y: menuButton.frame.origin.y + menuButton.frame.size.height  + (menuNameLabel.frame.size.height / 2) + 5)
-                    //menuNameLabel.center.x = menuButton.center.x
-                    //print("center: \(menuNameLabel.center)")
                 }
             }, completion: nil)
             i += 2
@@ -241,12 +236,13 @@ class IGCMenu : NSObject{
             self.pMenuButtonSuperView.layer.opacity = 1
             var menuIndex = 0
             
+            //for each row
             var i = 1
-            
             while i <= maxRow {
                 var remainingMenuButton = self.maxColumn
                 var menuCenterX: CGFloat
                 
+                //for each column
                 var j = 1
                 while j <= remainingMenuButton{
                     let menuButton = self.menuButtonArray[menuIndex]
@@ -287,7 +283,6 @@ class IGCMenu : NSObject{
     }
     
     @objc private func menuButtonClicked(sender : UIButton){
-        //check selector condition
         let buttonTag = sender.tag
         for index in 0..<menuButtonArray.count{
             let menuButton = menuButtonArray[index]
