@@ -21,28 +21,20 @@ class IGCMenu : NSObject{
     private let MENU_BACKGROUND_VIEW_TAG = 6200
     
     weak var delegate: IGCMenuDelegate?
-    var numberOfMenuItem: Int = 0           //Number of menu items to show
-    var menuRadius: CGFloat = 120           //Radius for circular menu
-    weak var menuButton: UIButton?          //Menu button reference
-    weak var menuSuperView: UIView?         //Menu button super view reference
+    var numberOfMenuItem: Int = 0               //Number of menu items to show
+    var menuRadius: CGFloat = 120               //Radius for circular menu
+    weak var menuButton: UIButton?              //Menu button reference
+    weak var menuSuperView: UIView?             //Menu button super view reference
     var menuItemsNameArray: [String]?           //Menu items name array,it can be empty
     var menuBackgroundColorsArray: [UIColor]?   //Menu items background color,it can be empty, default color is white
     var menuImagesNameArray: [String]?          //Menu item icons array it can be empty
-    var disableBackground = true            //Disable background view, default is TRUE
-    var maxColumn = 3                       //Maximium number of column,default is 3
-    var menuHeight = 65                     //height = width ,default is 65
+    var disableBackground = true                //Disable background view, default is TRUE
+    var maxColumn = 3                           //Maximium number of column,default is 3
+    var menuHeight = 65                         //height = width ,default is 65
     
     private var menuButtonArray = [UIButton]()      //array of menu buttons
     private var menuNameLabelArray = [UILabel]()    //array of menu name label
     private var pMenuButtonSuperView: UIView!
-    
-    private func menuStartTag(offset: Int) -> Int{
-        return (6000 + offset)
-    }
-    
-    private func menuNameLabeltag(offset: Int) -> Int{
-        return (6200 + offset)
-    }
     
     private func createMenuButtons(){
         menuButtonArray.removeAll()
@@ -67,15 +59,15 @@ class IGCMenu : NSObject{
             menuButton.frame = newFrame
             
             
-            guard let selfMenuButton = self.menuButton else { //chk name
+            guard let mainMenuButton = self.menuButton else {
                 return
             }
-            menuButton.center = selfMenuButton.center
+            menuButton.center = mainMenuButton.center
             menuButton.layer.cornerRadius = menuButton.frame.size.height/2
             menuButton.layer.masksToBounds = true
             menuButton.layer.opacity = 0
             menuButton.addTarget(self, action:#selector(IGCMenu.menuButtonClicked(sender:)), for: .touchUpInside)
-            pMenuButtonSuperView.insertSubview(menuButton, belowSubview: selfMenuButton)
+            pMenuButtonSuperView.insertSubview(menuButton, belowSubview: mainMenuButton)
             menuButtonArray.append(menuButton)
             
             //Display menu name if present
@@ -96,7 +88,7 @@ class IGCMenu : NSObject{
                 menuNameLabel.text = self.menuItemsNameArray?[i]
                 menuNameLabel.sizeToFit()
                 menuNameLabel.textColor = UIColor.white
-                pMenuButtonSuperView.insertSubview(menuNameLabel, belowSubview: selfMenuButton)
+                pMenuButtonSuperView.insertSubview(menuNameLabel, belowSubview: mainMenuButton)
                 menuNameLabelArray.append(menuNameLabel)
             }
             
@@ -125,9 +117,9 @@ class IGCMenu : NSObject{
         if self.menuSuperView != nil{
             self.menuSuperView = self.menuButton?.superview
         }
-        if let selfMenuButton = self.menuButton{
-            self.menuSuperView?.bringSubview(toFront: selfMenuButton)
-            self.menuSuperView?.insertSubview(pMenuButtonSuperView, belowSubview: selfMenuButton)
+        if let mainMenuButton = self.menuButton{
+            self.menuSuperView?.bringSubview(toFront: mainMenuButton)
+            self.menuSuperView?.insertSubview(pMenuButtonSuperView, belowSubview: mainMenuButton)
         }
         if self.disableBackground{
             pMenuButtonSuperView.isUserInteractionEnabled = true
@@ -153,9 +145,9 @@ class IGCMenu : NSObject{
                 let menuButton = self.menuButtonArray[i/2]
                 menuButton.layer.opacity = 1.0
                 
-                if let selfMenuButton = self.menuButton{
-                    let centerX: CGFloat = selfMenuButton.center.x - self.menuRadius * cos(angle * CGFloat(i))
-                    let centerY: CGFloat = selfMenuButton.center.y - self.menuRadius * sin(angle * CGFloat(i))
+                if let mainMenuButton = self.menuButton{
+                    let centerX: CGFloat = mainMenuButton.center.x - self.menuRadius * cos(angle * CGFloat(i))
+                    let centerY: CGFloat = mainMenuButton.center.y - self.menuRadius * sin(angle * CGFloat(i))
                     menuButton.center = CGPoint(x: centerX, y: centerY)
                 }
                 
@@ -175,12 +167,12 @@ class IGCMenu : NSObject{
             for i in 0..<self.menuButtonArray.count{
                 let menuButton = self.menuButtonArray[i]
                 menuButton.layer.opacity = 0
-                if let selfMenuButton = self.menuButton{
-                    menuButton.center = selfMenuButton.center
+                if let mainMenuButton = self.menuButton{
+                    menuButton.center = mainMenuButton.center
                     if self.menuNameLabelArray.count > i{
                         let menuNameLabel = self.menuNameLabelArray[i]
                         menuNameLabel.layer.opacity = 0
-                        menuNameLabel.center = selfMenuButton.center
+                        menuNameLabel.center = mainMenuButton.center
                         self.pMenuButtonSuperView.layer.opacity = 0
                     }
                 }
@@ -208,8 +200,8 @@ class IGCMenu : NSObject{
         
         let maxRow: Int = Int(ceilf(Float(menuButtonArray.count) / Float(self.maxColumn)))
         var topMenuCenterY: CGFloat = 0.0
-        if let selfMenuButton = self.menuButton{
-            topMenuCenterY = selfMenuButton.frame.origin.y - 10
+        if let mainMenuButton = self.menuButton{
+            topMenuCenterY = mainMenuButton.frame.origin.y - 10
         }
         var eachMenuVerticalSpace: CGFloat = 0
         var eachMenuWidth: CGFloat = 0
@@ -294,7 +286,7 @@ class IGCMenu : NSObject{
                     }
                 }
                 if self.delegate != nil{
-                    self.delegate?.igcMenuSelected!(selectedMenuName: menuName, atIndex: index)
+                    self.delegate?.igcMenuSelected?(selectedMenuName: menuName, atIndex: index)
                 }
                 break
             }
@@ -303,4 +295,11 @@ class IGCMenu : NSObject{
         
     }
     
+    private func menuStartTag(offset: Int) -> Int{
+        return (6000 + offset)
+    }
+    
+    private func menuNameLabeltag(offset: Int) -> Int{
+        return (6200 + offset)
+    }
 }
