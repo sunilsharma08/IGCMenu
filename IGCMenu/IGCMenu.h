@@ -9,6 +9,14 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    BlurEffectExtraLight,
+    BlurEffectLight,
+    BlurEffectDark,
+    Dark,
+    None
+}IGCMenuBackgroundOptions;
+
 @protocol IGCMenuDelegate <NSObject>
 
 @optional
@@ -30,6 +38,7 @@
 @property (nonatomic) BOOL disableBackground;       //Disable background view, default is TRUE
 @property int maxColumn;                            //Maximium number of column,default is 3
 @property int menuHeight;                           //height = width ,default is 65
+@property IGCMenuBackgroundOptions backgroundType;  //Default is BlurEffectDark
 
 -(void)showCircularMenu;
 -(void)hideCircularMenu;
