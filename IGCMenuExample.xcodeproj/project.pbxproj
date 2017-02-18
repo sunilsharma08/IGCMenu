@@ -213,9 +213,11 @@
 				TargetAttributes = {
 					18E5BB5C1C7210EC00864DFD = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 9V7MYB9CK7;
 					};
 					18E5BB751C7210EC00864DFD = {
 						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 9V7MYB9CK7;
 						TestTargetID = 18E5BB5C1C7210EC00864DFD;
 					};
 				};
@@ -409,6 +411,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 9V7MYB9CK7;
 				INFOPLIST_FILE = IGCMenuExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sunilsharma.$(PRODUCT_NAME:rfc1034identifier)";
@@ -422,6 +425,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				DEVELOPMENT_TEAM = 9V7MYB9CK7;
 				INFOPLIST_FILE = IGCMenuExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.sunilsharma.$(PRODUCT_NAME:rfc1034identifier)";
@@ -434,6 +438,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 9V7MYB9CK7;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -451,6 +456,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 9V7MYB9CK7;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = IGCMenuExampleTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
