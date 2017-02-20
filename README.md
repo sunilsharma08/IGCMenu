@@ -149,6 +149,11 @@ On selecting any menu item it gives selected menu item name(if present otherwise
 @property (nonatomic) BOOL disableBackground;       //Disable background view, default is TRUE
 @property int maxColumn;                            //Maximium number of column,default is 3
 @property int menuHeight;                           //height = width ,default is 65
+/*
+Set menu background.It can be BlurEffectExtraLight,BlurEffectLight,BlurEffectDark,Dark or None.
+Default is BlurEffectDark.
+*/
+@property IGCMenuBackgroundOptions backgroundType;
 
 ```
 # Note
