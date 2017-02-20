@@ -30,6 +30,7 @@
         self.numberOfMenuItem = 0;
         self.menuRadius = 120;
         self.maxColumn = 3;
+        self.backgroundType = BlurEffectDark;
     }
     return self;
 }
@@ -101,13 +102,50 @@
         }
         [self.menuSuperView bringSubviewToFront:self.menuButton];
         [self.menuSuperView insertSubview:pMenuButtonSuperView belowSubview:self.menuButton];
-    if (self.disableBackground) {
+    
+    if (self.disableBackground){
         pMenuButtonSuperView.userInteractionEnabled = YES;
-        pMenuButtonSuperView.layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8].CGColor;
     }
     else{
         pMenuButtonSuperView.userInteractionEnabled = NO;
-        pMenuButtonSuperView.layer.backgroundColor = [UIColor clearColor].CGColor;
+    }
+    [self setBackgroundEffect];
+}
+
+-(void)setBackgroundEffect{
+    
+    switch (self.backgroundType) {
+        case Dark:
+            pMenuButtonSuperView.layer.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.8].CGColor;
+            break;
+        case BlurEffectDark:
+            [self setBlurredView:UIBlurEffectStyleDark];
+            break;
+        case BlurEffectLight:
+            [self setBlurredView:UIBlurEffectStyleLight];
+            break;
+        case BlurEffectExtraLight:
+            [self setBlurredView:UIBlurEffectStyleExtraLight];
+            break;
+        case None:
+            pMenuButtonSuperView.layer.backgroundColor = [UIColor clearColor].CGColor;
+            break;
+        default:
+            pMenuButtonSuperView.layer.backgroundColor = [UIColor clearColor].CGColor;
+            break;
+    }
+}
+
+-(void)setBlurredView:(UIBlurEffectStyle) blurEffectStyle{
+    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:blurEffectStyle];
+        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = pMenuButtonSuperView.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        [pMenuButtonSuperView addSubview:blurEffectView];
+    }
+    else {
+        pMenuButtonSuperView.backgroundColor = [UIColor clearColor];
     }
 }
 
@@ -151,8 +189,8 @@
             }
         }
     } completion:^(BOOL finished) {
-        
         [pMenuButtonSuperView removeFromSuperview];
+        pMenuButtonSuperView = nil;
         for (int i = 0; i < menuButtonArray.count; i++) {
             UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:i];
             [menuButton removeFromSuperview];
