@@ -23,6 +23,7 @@ This is light weight and highly customisable menu.Support iOS 7 and above.
 # Features
 * Grid Menu
 * Circular Menu
+* Blur background
 * Enable/Diable menu background
 * Menu items can be without images/names
 
