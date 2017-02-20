@@ -34,7 +34,7 @@ class IGCMenu : NSObject{
     
     private var menuButtonArray = [UIButton]()      //array of menu buttons
     private var menuNameLabelArray = [UILabel]()    //array of menu name label
-    private var pMenuButtonSuperView: UIView!
+    private var pMenuButtonSuperView: UIView?
     
     private func createMenuButtons(){
         menuButtonArray.removeAll()
@@ -48,11 +48,10 @@ class IGCMenu : NSObject{
             var newFrame: CGRect = menuButton.frame
             var menuButtonSize: CGFloat
             if self.menuHeight == 0{
-                menuButtonSize = 0
-                self.menuHeight = 0
-            }else{
                 menuButtonSize = 65
                 self.menuHeight = 65
+            }else{
+                menuButtonSize = CGFloat(self.menuHeight)
             }
             
             newFrame.size = CGSize(width: menuButtonSize, height: menuButtonSize)
@@ -67,13 +66,10 @@ class IGCMenu : NSObject{
             menuButton.layer.masksToBounds = true
             menuButton.layer.opacity = 0
             menuButton.addTarget(self, action:#selector(IGCMenu.menuButtonClicked(sender:)), for: .touchUpInside)
-            pMenuButtonSuperView.insertSubview(menuButton, belowSubview: mainMenuButton)
+            pMenuButtonSuperView?.insertSubview(menuButton, belowSubview: mainMenuButton)
             menuButtonArray.append(menuButton)
             
             //Display menu name if present
-            if self.menuItemsNameArray == nil{
-                self.menuItemsNameArray = []
-            }
             if (self.menuItemsNameArray ?? []).count > i {
                 let menuNameLabel = UILabel()
                 menuNameLabel.backgroundColor = UIColor.clear
@@ -88,7 +84,7 @@ class IGCMenu : NSObject{
                 menuNameLabel.text = self.menuItemsNameArray?[i]
                 menuNameLabel.sizeToFit()
                 menuNameLabel.textColor = UIColor.white
-                pMenuButtonSuperView.insertSubview(menuNameLabel, belowSubview: mainMenuButton)
+                pMenuButtonSuperView?.insertSubview(menuNameLabel, belowSubview: mainMenuButton)
                 menuNameLabelArray.append(menuNameLabel)
             }
             
@@ -112,21 +108,21 @@ class IGCMenu : NSObject{
     private func menuSuperViewBackground(){
         if pMenuButtonSuperView == nil{
             pMenuButtonSuperView = UIView(frame: UIScreen.main.bounds)
-            pMenuButtonSuperView.tag = MENU_BACKGROUND_VIEW_TAG
+            pMenuButtonSuperView?.tag = MENU_BACKGROUND_VIEW_TAG
         }
         if self.menuSuperView != nil{
             self.menuSuperView = self.menuButton?.superview
         }
         if let mainMenuButton = self.menuButton{
             self.menuSuperView?.bringSubview(toFront: mainMenuButton)
-            self.menuSuperView?.insertSubview(pMenuButtonSuperView, belowSubview: mainMenuButton)
+            self.menuSuperView?.insertSubview(pMenuButtonSuperView!, belowSubview: mainMenuButton)
         }
         if self.disableBackground{
-            pMenuButtonSuperView.isUserInteractionEnabled = true
-            pMenuButtonSuperView.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
+            pMenuButtonSuperView?.isUserInteractionEnabled = true
+            pMenuButtonSuperView?.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
         }else{
-            pMenuButtonSuperView.isUserInteractionEnabled = false
-            pMenuButtonSuperView.layer.backgroundColor = UIColor.clear.cgColor
+            pMenuButtonSuperView?.isUserInteractionEnabled = false
+            pMenuButtonSuperView?.layer.backgroundColor = UIColor.clear.cgColor
         }
         
     }
@@ -141,7 +137,7 @@ class IGCMenu : NSObject{
         while i < (menuButtonArray.count * 2) {
             let angle: CGFloat = CGFloat(M_PI) / CGFloat(menuButtonArray.count * 2)
             UIView.animate(withDuration: ANIMATION_DURATION, delay: 0, options: .curveEaseInOut, animations: {
-                self.pMenuButtonSuperView.layer.opacity = 1.0
+                self.pMenuButtonSuperView?.layer.opacity = 1.0
                 let menuButton = self.menuButtonArray[i/2]
                 menuButton.layer.opacity = 1.0
                 
@@ -173,12 +169,12 @@ class IGCMenu : NSObject{
                         let menuNameLabel = self.menuNameLabelArray[i]
                         menuNameLabel.layer.opacity = 0
                         menuNameLabel.center = mainMenuButton.center
-                        self.pMenuButtonSuperView.layer.opacity = 0
+                        self.pMenuButtonSuperView?.layer.opacity = 0
                     }
                 }
             }
         }) { (finished) in
-            self.pMenuButtonSuperView.removeFromSuperview()
+            self.pMenuButtonSuperView?.removeFromSuperview()
             for i in 0..<self.menuButtonArray.count{
                 let menuButton = self.menuButtonArray[i]
                 menuButton.removeFromSuperview()
@@ -221,11 +217,11 @@ class IGCMenu : NSObject{
             topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * CGFloat(maxRow)) + eachMenuVerticalSpace/3
         }
         
-        let distanceBetweenMenu: CGFloat = ((pMenuButtonSuperView.frame.size.width - (CGFloat(self.maxColumn) * eachMenuWidth))/CGFloat(self.maxColumn + 1));
+        let distanceBetweenMenu: CGFloat = ((pMenuButtonSuperView!.frame.size.width - (CGFloat(self.maxColumn) * eachMenuWidth))/CGFloat(self.maxColumn + 1));
         
         
         UIView.animate(withDuration: ANIMATION_DURATION, delay: 0, options: .curveEaseInOut, animations: {
-            self.pMenuButtonSuperView.layer.opacity = 1
+            self.pMenuButtonSuperView?.layer.opacity = 1
             var menuIndex = 0
             
             //for each row
@@ -275,24 +271,22 @@ class IGCMenu : NSObject{
     }
     
     @objc private func menuButtonClicked(sender : UIButton){
-        let buttonTag = sender.tag
-        for index in 0..<menuButtonArray.count{
-            let menuButton = menuButtonArray[index]
-            if menuButton.tag == buttonTag{
-                var menuName: String = ""
-                if let menuItemsNameArray = self.menuItemsNameArray{
-                    if menuItemsNameArray.count > index{
-                        menuName = menuItemsNameArray[index]
+        if self.delegate != nil{
+            let buttonTag = sender.tag
+            for index in 0..<menuButtonArray.count{
+                let menuButton = menuButtonArray[index]
+                if menuButton.tag == buttonTag{
+                    var menuName: String = ""
+                    if let menuItemsNameArray = self.menuItemsNameArray{
+                        if menuItemsNameArray.count > index{
+                            menuName = menuItemsNameArray[index]
+                        }
                     }
-                }
-                if self.delegate != nil{
                     self.delegate?.igcMenuSelected?(selectedMenuName: menuName, atIndex: index)
+                    break
                 }
-                break
             }
         }
-        
-        
     }
     
     private func menuStartTag(offset: Int) -> Int{
