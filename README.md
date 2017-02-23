@@ -23,7 +23,6 @@ This is light weight and highly customisable menu.Support iOS 7 and above.
 #Features
 * Grid Menu
 * Circular Menu
-* Blur background
 * Enable/Diable menu background
 * Menu items can be without images/names
 
@@ -91,12 +90,11 @@ On menu button press you can show/hide menu items by calling methods below.
 
 To show/hide **circular menu**
 ```swift
-
 igcMenu?.showCircularMenu()  //Show circular menu
 igcMenu?.hideCircularMenu()  //Hide circular menu
 ```
 To show/hide **grid menu**
-```objc
+```swift
 igcMenu?.showGridMenu()     //Show grid menu
 igcMenu?.hideGridMenu()     //Hide grid menu
 ```
