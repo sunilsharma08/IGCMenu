@@ -2,6 +2,7 @@
 IGCMenu library gives easy way to create **Grid** and **Circular** menu in app.
 
 This is light weight and highly customisable menu.Support iOS 7 and above.
+For swift check [swift](https://github.com/sunilsharma08/IGCMenu/tree/swift) branch
 
 <table>
   <tr>
