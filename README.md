@@ -12,11 +12,18 @@ This is light weight and highly customisable menu.Support iOS 7 and above.
     <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/Grid_Menu_Demo.gif" alt="Grid Menu" width="320" height="568"/></td>
     <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/Circular_Menu_Demo.gif" alt="Circular Menu" width="320" height="568"/></td>
   </tr>
+  <tr>
+    <th>Blured Background</th>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/IGCMenu_BluredBg.gif" alt="Circular Menu" width="320" height="568"/></td>
+  </tr>
 </table>
 
 #Features
 * Grid Menu
 * Circular Menu
+* Blur background
 * Enable/Diable menu background
 * Menu items can be without images/names
 
@@ -50,6 +57,8 @@ var igcMenu: IGCMenu?
    igcMenu?.menuSuperView = self.view      //Pass reference of menu button super view
    igcMenu?.disableBackground = true       //Enable/disable menu background
    igcMenu?.numberOfMenuItem = 5           //Number of menu items to display
+   //Menu background. It can be BlurEffectExtraLight,BlurEffectLight,BlurEffectDark,Dark or None
+   igcMenu?.backgroundType = .BlurEffectDark
         
    /* Optional
    Pass name of menu items
@@ -114,6 +123,11 @@ public var menuImagesNameArray: [String]?        //Menu item icons array it can 
 public var disableBackground              //Disable background view, default is TRUE
 public var maxColumn: Int                 //Maximium number of column,default is 3
 public var menuHeight: Int                //height = width ,default is 65
+/*
+Set menu background.It can be BlurEffectExtraLight,BlurEffectLight,BlurEffectDark,Dark or None.
+Default is BlurEffectDark.
+*/
+public var backgroundType: IGCMenuBackgroundOptions
 
 ```
 #Note
