@@ -33,6 +33,9 @@ class ViewController: UIViewController, IGCMenuDelegate {
         igcMenu?.disableBackground = true       //Enable/disable menu background
         igcMenu?.numberOfMenuItem = 5           //Number of menu items to display
         
+        //Menu background. It can be BlurEffectExtraLight,BlurEffectLight,BlurEffectDark,Dark or None
+        igcMenu?.backgroundType = .BlurEffectDark
+        
         /* Optional
          Pass name of menu items
          **/

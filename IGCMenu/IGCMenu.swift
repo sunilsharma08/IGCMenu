@@ -10,6 +10,13 @@
 import UIKit
 import QuartzCore
 
+enum IGCMenuBackgroundOptions {
+    case BlurEffectExtraLight
+    case BlurEffectLight
+    case BlurEffectDark
+    case Dark
+    case None
+}
 
 @objc protocol IGCMenuDelegate {
     @objc optional func igcMenuSelected(selectedMenuName: String, atIndex index: Int)
@@ -25,9 +32,10 @@ class IGCMenu : NSObject {
     public var menuItemsNameArray: [String]?           //Menu items name array,it can be empty
     public var menuBackgroundColorsArray: [UIColor]?   //Menu items background color,it can be empty, default color is white
     public var menuImagesNameArray: [String]?          //Menu item icons array it can be empty
-    public var disableBackground = true                //Disable background view, default is TRUE
-    public var maxColumn = 3                           //Maximium number of column,default is 3
-    public var menuHeight = 65                         //height = width ,default is 65
+    public var disableBackground:Bool = true           //Disable background view, default is TRUE
+    public var maxColumn: Int = 3                      //Maximium number of column,default is 3
+    public var menuHeight: Int = 65                    //height = width ,default is 65
+    public var backgroundType: IGCMenuBackgroundOptions = .BlurEffectDark  //Default is BlurEffectDark
     
     private let ANIMATION_DURATION = 0.4
     private let MENU_BACKGROUND_VIEW_TAG = 6200
@@ -109,13 +117,41 @@ class IGCMenu : NSObject {
         }
         if self.disableBackground {
             pMenuButtonSuperView?.isUserInteractionEnabled = true
-            pMenuButtonSuperView?.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
-        }else{
+        }
+        else{
             pMenuButtonSuperView?.isUserInteractionEnabled = false
+        }
+        self.setBackgroundEffect()
+    }
+    
+    func setBackgroundEffect() {
+        switch self.backgroundType {
+        case .Dark:
+            pMenuButtonSuperView?.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
+        case .BlurEffectDark:
+            self.setBlurredView(blurEffectStyle: .dark)
+        case .BlurEffectLight:
+            self.setBlurredView(blurEffectStyle: .light)
+        case .BlurEffectExtraLight:
+            self.setBlurredView(blurEffectStyle: .extraLight)
+        case .None:
             pMenuButtonSuperView?.layer.backgroundColor = UIColor.clear.cgColor
         }
-        
     }
+    
+    func setBlurredView(blurEffectStyle:UIBlurEffectStyle) {
+        if !UIAccessibilityIsReduceMotionEnabled() {
+            let blurEffect = UIBlurEffect(style: blurEffectStyle)
+            let blurEffectView = UIVisualEffectView(effect: blurEffect)
+            blurEffectView.frame = (pMenuButtonSuperView?.bounds ?? CGRect.zero)
+            blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            pMenuButtonSuperView?.addSubview(blurEffectView)
+        }
+        else {
+            pMenuButtonSuperView?.layer.backgroundColor = UIColor.clear.cgColor
+        }
+    }
+    
     
     func showCircularMenu() {
         self.menuSuperViewBackground()
@@ -162,6 +198,7 @@ class IGCMenu : NSObject {
             self.pMenuButtonSuperView?.layer.opacity = 0
         }) { (finished) in
             self.pMenuButtonSuperView?.removeFromSuperview()
+            self.pMenuButtonSuperView = nil
             for i in 0..<self.menuButtonArray.count {
                 let menuButton = self.menuButtonArray[i]
                 menuButton.removeFromSuperview()
