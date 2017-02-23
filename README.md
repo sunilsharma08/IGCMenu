@@ -12,6 +12,12 @@ This is light weight and highly customisable menu.Support iOS 7 and above.
     <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/Grid_Menu_Demo.gif" alt="Grid Menu" width="320" height="568"/></td>
     <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/Circular_Menu_Demo.gif" alt="Circular Menu" width="320" height="568"/></td>
   </tr>
+  <tr>
+    <th>Blured Background</th>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/sunilsharma08/IGCMenu/develop/IGCMenu_BluredBg.gif" alt="Circular Menu" width="320" height="568"/></td>
+  </tr>
 </table>
 
 #Features
