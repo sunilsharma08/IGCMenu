@@ -117,11 +117,9 @@ class IGCMenu : NSObject {
         
     }
     
-    func showCircularMenu(){
+    func showCircularMenu() {
         self.menuSuperViewBackground()
-        if menuButtonArray.count <= 0{
-            self.createMenuButtons()
-        }
+        self.createMenuButtons()
         
         var i = 1
         while i < (menuButtonArray.count * 2) {
@@ -131,7 +129,7 @@ class IGCMenu : NSObject {
                 let menuButton = self.menuButtonArray[i/2]
                 menuButton.layer.opacity = 1.0
                 
-                if let mainMenuButton = self.menuButton{
+                if let mainMenuButton = self.menuButton {
                     let centerX: CGFloat = mainMenuButton.center.x - self.menuRadius * cos(angle * CGFloat(i))
                     let centerY: CGFloat = mainMenuButton.center.y - self.menuRadius * sin(angle * CGFloat(i))
                     menuButton.center = CGPoint(x: centerX, y: centerY)
@@ -143,29 +141,28 @@ class IGCMenu : NSObject {
                     menuNameLabel.center = CGPoint(x: menuButton.center.x, y: menuButton.frame.origin.y + menuButton.frame.size.height  + (menuNameLabel.frame.size.height / 2) + 5)
                 }
             }, completion: nil)
-            i += 2
+            i = i+2
         }
-        
     }
     
     func hideCircularMenu(){
         UIView.animate(withDuration: ANIMATION_DURATION, delay: 0, options: .curveEaseInOut, animations: {
-            for i in 0..<self.menuButtonArray.count{
+            for i in 0..<self.menuButtonArray.count {
                 let menuButton = self.menuButtonArray[i]
                 menuButton.layer.opacity = 0
-                if let mainMenuButton = self.menuButton{
+                if let mainMenuButton = self.menuButton {
                     menuButton.center = mainMenuButton.center
                     if self.menuNameLabelArray.count > i{
                         let menuNameLabel = self.menuNameLabelArray[i]
                         menuNameLabel.layer.opacity = 0
                         menuNameLabel.center = mainMenuButton.center
-                        self.pMenuButtonSuperView?.layer.opacity = 0
                     }
                 }
             }
+            self.pMenuButtonSuperView?.layer.opacity = 0
         }) { (finished) in
             self.pMenuButtonSuperView?.removeFromSuperview()
-            for i in 0..<self.menuButtonArray.count{
+            for i in 0..<self.menuButtonArray.count {
                 let menuButton = self.menuButtonArray[i]
                 menuButton.removeFromSuperview()
                 if self.menuNameLabelArray.count > i{
@@ -180,13 +177,11 @@ class IGCMenu : NSObject {
     
     func showGridMenu(){
         self.menuSuperViewBackground()
-        if menuButtonArray.count <= 0{
-            self.createMenuButtons()
-        }
+        self.createMenuButtons()
         
         let maxRow: Int = Int(ceilf(Float(menuButtonArray.count) / Float(self.maxColumn)))
         var topMenuCenterY: CGFloat = 0.0
-        if let mainMenuButton = self.menuButton{
+        if let mainMenuButton = self.menuButton {
             topMenuCenterY = mainMenuButton.frame.origin.y - 10
         }
         var eachMenuVerticalSpace: CGFloat = 0
@@ -197,12 +192,13 @@ class IGCMenu : NSObject {
             eachMenuVerticalSpace = menuButton.frame.size.height + 20
             eachMenuWidth = menuButton.frame.size.width
             
-            if menuNameLabelArray.count > 0{
+            if menuNameLabelArray.count > 0 {
                 let nameLabel = menuNameLabelArray[0]
                 eachMenuVerticalSpace = eachMenuVerticalSpace + nameLabel.frame.size.height
             }
             topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * CGFloat(maxRow)) + menuButton.frame.size.height/2
-        }else{
+        }
+        else {
             eachMenuVerticalSpace = 100
             topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * CGFloat(maxRow)) + eachMenuVerticalSpace/3
         }
@@ -222,21 +218,19 @@ class IGCMenu : NSObject {
                 
                 //for each column
                 var j = 1
-                while j <= remainingMenuButton{
+                while j <= remainingMenuButton {
                     let menuButton = self.menuButtonArray[menuIndex]
                     menuButton.layer.opacity = 1.0
                     
                     let menuButtonWidth = menuButton.frame.size.width
                     menuCenterX = (distanceBetweenMenu * CGFloat(j)) + CGFloat(2 * j - 1) * (menuButtonWidth/2.0)
                     
-                    if i == maxRow{
+                    if i == maxRow {
                         remainingMenuButton = self.menuButtonArray.count % self.maxColumn
                         if remainingMenuButton == 0 {
                             remainingMenuButton = self.maxColumn
                         }
                         menuCenterX = menuCenterX + CGFloat(self.maxColumn - remainingMenuButton) * (distanceBetweenMenu / CGFloat(2)) + CGFloat(self.maxColumn - remainingMenuButton) * menuButton.frame.size.width / CGFloat(2)
-                        
-                        
                     }
                     menuButton.center = CGPoint(x: CGFloat(menuCenterX), y: CGFloat(topMenuCenterY))
                     if self.menuNameLabelArray.count > menuIndex {
@@ -248,12 +242,10 @@ class IGCMenu : NSObject {
                     j += 1
                 }
                 i += 1
-                topMenuCenterY += eachMenuVerticalSpace
+                topMenuCenterY = topMenuCenterY + eachMenuVerticalSpace
             }
             
         }, completion: nil)
-        
-        
     }
     
     func hideGridMenu(){
@@ -261,11 +253,11 @@ class IGCMenu : NSObject {
     }
     
     @objc private func menuButtonClicked(sender : UIButton){
-        if self.delegate != nil{
+        if self.delegate != nil {
             let buttonTag = sender.tag
-            for index in 0..<menuButtonArray.count{
+            for index in 0..<menuButtonArray.count {
                 let menuButton = menuButtonArray[index]
-                if menuButton.tag == buttonTag{
+                if menuButton.tag == buttonTag {
                     var menuName: String = ""
                     if let menuItemsNameArray = self.menuItemsNameArray{
                         if menuItemsNameArray.count > index{
