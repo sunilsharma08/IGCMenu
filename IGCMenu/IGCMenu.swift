@@ -15,48 +15,41 @@ import QuartzCore
     @objc optional func igcMenuSelected(selectedMenuName: String, atIndex index: Int)
 }
 
-class IGCMenu : NSObject{
+class IGCMenu : NSObject {
+    
+    public weak var delegate: IGCMenuDelegate?
+    public var numberOfMenuItem: Int = 0               //Number of menu items to show
+    public var menuRadius: CGFloat = 120               //Radius for circular menu
+    public weak var menuButton: UIButton?              //Menu button reference
+    public weak var menuSuperView: UIView?             //Menu button super view reference
+    public var menuItemsNameArray: [String]?           //Menu items name array,it can be empty
+    public var menuBackgroundColorsArray: [UIColor]?   //Menu items background color,it can be empty, default color is white
+    public var menuImagesNameArray: [String]?          //Menu item icons array it can be empty
+    public var disableBackground = true                //Disable background view, default is TRUE
+    public var maxColumn = 3                           //Maximium number of column,default is 3
+    public var menuHeight = 65                         //height = width ,default is 65
     
     private let ANIMATION_DURATION = 0.4
     private let MENU_BACKGROUND_VIEW_TAG = 6200
-    
-    weak var delegate: IGCMenuDelegate?
-    var numberOfMenuItem: Int = 0               //Number of menu items to show
-    var menuRadius: CGFloat = 120               //Radius for circular menu
-    weak var menuButton: UIButton?              //Menu button reference
-    weak var menuSuperView: UIView?             //Menu button super view reference
-    var menuItemsNameArray: [String]?           //Menu items name array,it can be empty
-    var menuBackgroundColorsArray: [UIColor]?   //Menu items background color,it can be empty, default color is white
-    var menuImagesNameArray: [String]?          //Menu item icons array it can be empty
-    var disableBackground = true                //Disable background view, default is TRUE
-    var maxColumn = 3                           //Maximium number of column,default is 3
-    var menuHeight = 65                         //height = width ,default is 65
-    
     private var menuButtonArray = [UIButton]()      //array of menu buttons
     private var menuNameLabelArray = [UILabel]()    //array of menu name label
     private var pMenuButtonSuperView: UIView?
     
-    private func createMenuButtons(){
+    private func createMenuButtons() {
         menuButtonArray.removeAll()
         menuNameLabelArray.removeAll()
         
-        for i in 0..<self.numberOfMenuItem{
+        for i in 0..<self.numberOfMenuItem {
+            
             let menuButton = UIButton(type: .custom)
             menuButton.backgroundColor = UIColor.white
             menuButton.tag = menuStartTag(offset: i)
             
-            var newFrame: CGRect = menuButton.frame
-            var menuButtonSize: CGFloat
-            if self.menuHeight == 0{
-                menuButtonSize = 65
+            if self.menuHeight == 0 {
                 self.menuHeight = 65
-            }else{
-                menuButtonSize = CGFloat(self.menuHeight)
             }
             
-            newFrame.size = CGSize(width: menuButtonSize, height: menuButtonSize)
-            menuButton.frame = newFrame
-            
+            menuButton.frame.size = CGSize(width: self.menuHeight, height: self.menuHeight)
             
             guard let mainMenuButton = self.menuButton else {
                 return
@@ -74,9 +67,7 @@ class IGCMenu : NSObject{
                 let menuNameLabel = UILabel()
                 menuNameLabel.backgroundColor = UIColor.clear
                 menuNameLabel.numberOfLines = 1
-                newFrame = menuNameLabel.frame
-                newFrame.size = CGSize(width: CGFloat(menuButton.frame.size.width), height: CGFloat(20))
-                menuNameLabel.frame = newFrame
+                menuNameLabel.frame.size = CGSize(width: CGFloat(menuButton.frame.size.width), height: CGFloat(20))
                 menuNameLabel.center = menuButton.center
                 menuNameLabel.layer.opacity = 0.0
                 menuNameLabel.textAlignment = .center
@@ -89,35 +80,34 @@ class IGCMenu : NSObject{
             }
             
             //Set custom menus button background color if present
-            if let menuBackgroundColorsArray = self.menuBackgroundColorsArray{
-                if menuBackgroundColorsArray.count > i{
-                    menuButton.backgroundColor = menuBackgroundColorsArray[i]
-                }
+            if let menuBackgroundColorsArray = self.menuBackgroundColorsArray,menuBackgroundColorsArray.count > i {
+                menuButton.backgroundColor = menuBackgroundColorsArray[i]
             }
             
             //Display menu images if present
-            if let menuImagesNameArray = self.menuImagesNameArray{
-                if menuImagesNameArray.count > i{
-                    let buttonImage = UIImage(named: menuImagesNameArray[i])
-                    menuButton.setImage(buttonImage, for: .normal)
-                }
+            if let menuImagesNameArray = self.menuImagesNameArray, menuImagesNameArray.count > i{
+                let buttonImage = UIImage(named: menuImagesNameArray[i])
+                menuButton.setImage(buttonImage, for: .normal)
             }
         }
     }
     
-    private func menuSuperViewBackground(){
-        if pMenuButtonSuperView == nil{
+    private func menuSuperViewBackground() {
+        if pMenuButtonSuperView == nil {
             pMenuButtonSuperView = UIView(frame: UIScreen.main.bounds)
             pMenuButtonSuperView?.tag = MENU_BACKGROUND_VIEW_TAG
         }
-        if self.menuSuperView != nil{
+        if self.menuSuperView == nil {
             self.menuSuperView = self.menuButton?.superview
         }
-        if let mainMenuButton = self.menuButton{
+        if let mainMenuButton = self.menuButton {
             self.menuSuperView?.bringSubview(toFront: mainMenuButton)
             self.menuSuperView?.insertSubview(pMenuButtonSuperView!, belowSubview: mainMenuButton)
         }
-        if self.disableBackground{
+        else {
+            assertionFailure("Menu button reference is nil")
+        }
+        if self.disableBackground {
             pMenuButtonSuperView?.isUserInteractionEnabled = true
             pMenuButtonSuperView?.layer.backgroundColor = UIColor.black.withAlphaComponent(0.8).cgColor
         }else{

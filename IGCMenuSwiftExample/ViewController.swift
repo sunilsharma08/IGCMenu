@@ -22,14 +22,12 @@ class ViewController: UIViewController, IGCMenuDelegate {
         setupMenu()
     }
     
-    func setupMenu(){
+    func setupMenu() {
         self.menuButton.clipsToBounds = true
         self.menuButton.layer.cornerRadius = self.menuButton.frame.size.height / 2
         
         //Grid menu setup
-        if igcMenu == nil{
-            igcMenu = IGCMenu()
-        }
+        igcMenu = IGCMenu()
         igcMenu?.menuButton = self.menuButton   //Grid menu setup
         igcMenu?.menuSuperView = self.view      //Pass reference of menu button super view
         igcMenu?.disableBackground = true       //Enable/disable menu background
@@ -62,11 +60,12 @@ class ViewController: UIViewController, IGCMenuDelegate {
     }
     
     @IBAction func menuButtonPressed(_ sender: UIButton) {
-        if isMenuActive{
+        if isMenuActive {
             self.menuButton.setImage(UIImage(named: "plus.png"), for: .normal)
             self.menuTypeSwitch.isOn ? igcMenu?.hideGridMenu() : igcMenu?.hideCircularMenu()
             isMenuActive = false
-        }else{
+        }
+        else {
             self.menuButton.setImage(UIImage(named: "cross.png"), for: .normal)
             self.menuTypeSwitch.isOn ? igcMenu?.showGridMenu() : igcMenu?.showCircularMenu()
             isMenuActive = true
@@ -98,7 +97,6 @@ class ViewController: UIViewController, IGCMenuDelegate {
         }
     }
     
-
 
 }
 
