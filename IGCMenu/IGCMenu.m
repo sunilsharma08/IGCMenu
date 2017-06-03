@@ -293,5 +293,11 @@
 }
 }
 
+-(void)updateButtonBackground:(NSInteger )atIndex withColor:(UIColor *) newColor {
+    if (atIndex >= 0 && atIndex < menuButtonArray.count) {
+        UIButton *button = menuButtonArray[atIndex];
+        button.backgroundColor = newColor;
+    }
+}
 
 @end

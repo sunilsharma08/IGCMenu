@@ -44,5 +44,6 @@ typedef enum {
 -(void)hideCircularMenu;
 -(void)showGridMenu;
 -(void)hideGridMenu;
+-(void)updateButtonBackground:(NSInteger)atIndex withColor:(UIColor *) newColor;
 
 @end

@@ -88,6 +88,8 @@
 - (void)igcMenuSelected:(NSString *)selectedMenuName atIndex:(NSInteger)index{
     NSLog(@"selected menu name = %@ at index = %ld",selectedMenuName,(long)index);
     
+    [igcMenu updateButtonBackground:index withColor: [UIColor redColor]];
+    
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@ at index %ld is selected",selectedMenuName,(long)index] delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil];
     [alertView show];
     
