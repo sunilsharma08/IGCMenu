@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "IGCMenu"
-  s.version      = "1.0"
+  s.version      = "1.1"
   s.summary      = "Grid and Circular Menu for iOS."
 s.description  = "IGCMenu library gives easy way to create Grid and Circular menu in app.
 This is light weight and highly customisable menu.Support iOS 7 and above."
