@@ -38,6 +38,7 @@
         self.menuRadius = 120;
         self.maxColumn = 3;
         self.backgroundType = BlurEffectDark;
+        self.positionStyle = Top;
         
         //observe orientation changes
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -112,7 +113,7 @@
         pMenuButtonSuperView.tag = MENU_BACKGROUND_VIEW_TAG;
     }
     if (!self.menuSuperView) {
-            self.menuSuperView = [self.menuButton superview];
+        self.menuSuperView = [self.menuButton superview];
     }
     [self.menuSuperView bringSubviewToFront:self.menuButton];
     [self.menuSuperView insertSubview:pMenuButtonSuperView belowSubview:self.menuButton];
@@ -184,7 +185,7 @@
 - (void)updateCircularMenuLayoutAtIndex:(int)i{
     UIButton * menuButton = (UIButton *)[menuButtonArray objectAtIndex:i/2];
     menuButton.layer.opacity = 1.0;
-    CGFloat angle = M_PI / (menuButtonArray.count * 2);
+    CGFloat angle = self.positionStyle == Top ? M_PI / (menuButtonArray.count * 2) : -M_PI / (menuButtonArray.count * 2);
     menuButton.center = CGPointMake(self.menuButton.center.x - self.menuRadius * cos(angle * i), self.menuButton.center.y - self.menuRadius * sin(angle * i));
     if (menuNameLabelArray.count > (i/2)) {
         UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:i/2];
@@ -245,7 +246,7 @@
     eachMenuWidth = 0;
     if (menuButtonArray.count) {
         UIButton *menuButton = (UIButton *)menuButtonArray[0];
-        eachMenuVerticalSpace = menuButton.frame.size.height + 20;
+        eachMenuVerticalSpace = self.positionStyle == Top ? menuButton.frame.size.height + 20 : -(menuButton.frame.size.height + 20);
         eachMenuWidth = menuButton.frame.size.width;
         if (menuNameLabelArray.count) {
             UILabel *nameLabel = (UILabel *)menuNameLabelArray[0];
@@ -254,14 +255,14 @@
         topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * maxRow) + menuButton.frame.size.height/2;
     }
     else{
-        eachMenuVerticalSpace = 100.0;
+        eachMenuVerticalSpace = self.positionStyle == Top ? 100.0 : -100.0;
         topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * maxRow) + eachMenuVerticalSpace/3;
     }
 }
 
 - (void)updateGridMenuLayout{
     
-     __block CGFloat distanceBetweenMenu = ((pMenuButtonSuperView.frame.size.width - (self.maxColumn*eachMenuWidth))/(self.maxColumn +1));
+    __block CGFloat distanceBetweenMenu = ((pMenuButtonSuperView.frame.size.width - (self.maxColumn*eachMenuWidth))/(self.maxColumn +1));
     int menuIndex = 0;
     //for each row
     for(int  i = 1; i <= maxRow; i++,topMenuCenterY += eachMenuVerticalSpace) {
@@ -303,22 +304,22 @@
 
 - (void)menuButtonClicked:(UIButton *)sender{
     if ([self.delegate respondsToSelector:@selector(igcMenuSelected:atIndex:)]) {
-    int index;
-    NSInteger buttonTag =  sender.tag;
-    for (index = 0; index < menuButtonArray.count; index++) {
-        UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:index];
-        if (menuButton.tag == buttonTag) {
-            NSString *menuName;
-            if (self.menuItemsNameArray.count > index) {
-                menuName = self.menuItemsNameArray[index];
+        int index;
+        NSInteger buttonTag =  sender.tag;
+        for (index = 0; index < menuButtonArray.count; index++) {
+            UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:index];
+            if (menuButton.tag == buttonTag) {
+                NSString *menuName;
+                if (self.menuItemsNameArray.count > index) {
+                    menuName = self.menuItemsNameArray[index];
+                }
+                if (self.delegate) {
+                    [self.delegate igcMenuSelected:menuName atIndex:index];
+                }
+                break;
             }
-            if (self.delegate) {
-                [self.delegate igcMenuSelected:menuName atIndex:index];
-            }
-            break;
         }
     }
-}
 }
 
 //MARK: Orientation changes
@@ -345,3 +346,4 @@
 }
 
 @end
+

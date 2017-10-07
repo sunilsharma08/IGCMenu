@@ -17,6 +17,11 @@ typedef enum {
     None
 }IGCMenuBackgroundOptions;
 
+typedef enum {
+    Top,
+    Bottom,
+}IGCMenuPositionOptions;
+
 @protocol IGCMenuDelegate <NSObject>
 
 @optional
@@ -39,6 +44,7 @@ typedef enum {
 @property int maxColumn;                            //Maximium number of column,default is 3
 @property int menuHeight;                           //height = width ,default is 65
 @property IGCMenuBackgroundOptions backgroundType;  //Default is BlurEffectDark
+@property IGCMenuPositionOptions positionStyle;    //Default is Top
 
 -(void)showCircularMenu;
 -(void)hideCircularMenu;
@@ -46,3 +52,5 @@ typedef enum {
 -(void)hideGridMenu;
 
 @end
+
+
