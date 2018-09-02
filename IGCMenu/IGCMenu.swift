@@ -159,7 +159,7 @@ class IGCMenu : NSObject {
         
         var i = 1
         while i < (menuButtonArray.count * 2) {
-            let angle: CGFloat = CGFloat(M_PI) / CGFloat(menuButtonArray.count * 2)
+            let angle: CGFloat = CGFloat(Float.pi) / CGFloat(menuButtonArray.count * 2)
             UIView.animate(withDuration: ANIMATION_DURATION, delay: 0, options: .curveEaseInOut, animations: {
                 self.pMenuButtonSuperView?.layer.opacity = 1.0
                 let menuButton = self.menuButtonArray[i/2]
