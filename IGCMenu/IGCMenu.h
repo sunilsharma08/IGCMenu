@@ -39,7 +39,8 @@ typedef enum {
 @property int maxColumn;                            //Maximium number of column,default is 3
 @property int menuHeight;                           //height = width ,default is 65
 @property IGCMenuBackgroundOptions backgroundType;  //Default is BlurEffectDark
-
+@property (nonatomic) UIColor *menuItemColor;
+    
 -(void)showCircularMenu;
 -(void)hideCircularMenu;
 -(void)showGridMenu;
