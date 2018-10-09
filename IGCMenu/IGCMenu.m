@@ -30,6 +30,7 @@
         self.numberOfMenuItem = 0;
         self.menuRadius = 120;
         self.maxColumn = 3;
+        self.menuItemColor = [UIColor whiteColor];
         self.backgroundType = BlurEffectDark;
     }
     return self;
@@ -75,7 +76,7 @@
             menuNameLabel.font = [UIFont systemFontOfSize:12];
             menuNameLabel.text = self.menuItemsNameArray[i];
             [menuNameLabel sizeToFit];
-            menuNameLabel.textColor = [UIColor whiteColor];
+            menuNameLabel.textColor = self.menuItemColor;
             [pMenuButtonSuperView insertSubview:menuNameLabel belowSubview:self.menuButton];
             [menuNameLabelArray addObject:menuNameLabel];
         }
