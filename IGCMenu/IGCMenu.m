@@ -80,6 +80,12 @@
             [menuNameLabelArray addObject:menuNameLabel];
         }
         
+        // set accessibility label and add the label if present
+        if (self.menuItemsAccessibilityLabelsArray.count > i) {
+            menuButton.isAccessibilityElement = YES;
+            menuButton.accessibilityLabel = self.menuItemsAccessibilityLabelsArray[i];
+        }
+        
         //Set custom menus button background color if present
         if (self.menuBackgroundColorsArray.count > i) {
             menuButton.backgroundColor =(UIColor *)self.menuBackgroundColorsArray[i];

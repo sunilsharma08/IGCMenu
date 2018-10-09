@@ -35,6 +35,7 @@ typedef enum {
 @property (strong,nonatomic) NSArray *menuItemsNameArray;        //Menu items name array,it can be empty
 @property (strong,nonatomic) NSArray *menuBackgroundColorsArray; //Menu items background color,it can be empty, default color is white
 @property (strong,nonatomic) NSArray *menuImagesNameArray;       //Menu item icons array it can be empty
+@property (strong,nonatomic) NSArray *menuItemsAccessibilityLabelsArray;      //Menu Accessibility Labels
 @property (nonatomic) BOOL disableBackground;       //Disable background view, default is TRUE
 @property int maxColumn;                            //Maximium number of column,default is 3
 @property int menuHeight;                           //height = width ,default is 65
