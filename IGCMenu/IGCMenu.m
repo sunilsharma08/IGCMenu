@@ -31,6 +31,8 @@
         self.menuRadius = 120;
         self.maxColumn = 3;
         self.backgroundType = BlurEffectDark;
+        self.menuTitleColor = [UIColor whiteColor];
+        self.menuTitleFont = [UIFont systemFontOfSize:12];
     }
     return self;
 }
@@ -72,10 +74,10 @@
             menuNameLabel.center = menuButton.center;
             menuNameLabel.layer.opacity = 0.0;
             menuNameLabel.textAlignment = NSTextAlignmentCenter;
-            menuNameLabel.font = [UIFont systemFontOfSize:12];
+            menuNameLabel.font = self.menuTitleFont;
             menuNameLabel.text = self.menuItemsNameArray[i];
             [menuNameLabel sizeToFit];
-            menuNameLabel.textColor = [UIColor whiteColor];
+            menuNameLabel.textColor = self.menuTitleColor;
             [pMenuButtonSuperView insertSubview:menuNameLabel belowSubview:self.menuButton];
             [menuNameLabelArray addObject:menuNameLabel];
         }
