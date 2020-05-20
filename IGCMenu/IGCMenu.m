@@ -170,12 +170,12 @@
         
         CGFloat angle = M_PI / (menuButtonArray.count * 2);
         [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            pMenuButtonSuperView.layer.opacity = 1.0;
-            UIButton * menuButton = (UIButton *)[menuButtonArray objectAtIndex:i/2];
+            self->pMenuButtonSuperView.layer.opacity = 1.0;
+            UIButton * menuButton = (UIButton *)[self->menuButtonArray objectAtIndex:i/2];
             menuButton.layer.opacity = 1.0;
             menuButton.center = CGPointMake(self.menuButton.center.x - self.menuRadius * cos(angle * i), self.menuButton.center.y - self.menuRadius * sin(angle * i));
-            if (menuNameLabelArray.count > (i/2)) {
-                UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:i/2];
+            if (self->menuNameLabelArray.count > (i/2)) {
+                UILabel *menuNameLabel = (UILabel *)[self->menuNameLabelArray objectAtIndex:i/2];
                 menuNameLabel.layer.opacity = 1.0;
                 menuNameLabel.center = CGPointMake(menuButton.center.x, menuButton.frame.origin.y + menuButton.frame.size.height  + (menuNameLabel.frame.size.height / 2) + 5);
             }
@@ -185,30 +185,30 @@
 
 - (void)hideCircularMenu{
     [UIView animateWithDuration:ANIMATION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        for (int i = 0; i < menuButtonArray.count; i++) {
-            UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:i];
+        for (int i = 0; i < self->menuButtonArray.count; i++) {
+            UIButton *menuButton = (UIButton *)[self->menuButtonArray objectAtIndex:i];
             menuButton.layer.opacity = 0.0;
             menuButton.center = self.menuButton.center;
-            if (menuNameLabelArray.count > i) {
-                UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:i];
+            if (self->menuNameLabelArray.count > i) {
+                UILabel *menuNameLabel = (UILabel *)[self->menuNameLabelArray objectAtIndex:i];
                 menuNameLabel.layer.opacity = 0.0;
                 menuNameLabel.center = self.menuButton.center;
-                pMenuButtonSuperView.layer.opacity = 0.0;
+                self->pMenuButtonSuperView.layer.opacity = 0.0;
             }
         }
     } completion:^(BOOL finished) {
-        [pMenuButtonSuperView removeFromSuperview];
-        pMenuButtonSuperView = nil;
-        for (int i = 0; i < menuButtonArray.count; i++) {
-            UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:i];
+        [self->pMenuButtonSuperView removeFromSuperview];
+        self->pMenuButtonSuperView = nil;
+        for (int i = 0; i < self->menuButtonArray.count; i++) {
+            UIButton *menuButton = (UIButton *)[self->menuButtonArray objectAtIndex:i];
             [menuButton removeFromSuperview];
-            if (menuNameLabelArray.count > i) {
-                UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:i];
+            if (self->menuNameLabelArray.count > i) {
+                UILabel *menuNameLabel = (UILabel *)[self->menuNameLabelArray objectAtIndex:i];
                 [menuNameLabel removeFromSuperview];
             }
         }
-        [menuNameLabelArray removeAllObjects];
-        [menuButtonArray removeAllObjects];
+        [self->menuNameLabelArray removeAllObjects];
+        [self->menuButtonArray removeAllObjects];
     }];
 }
 
@@ -240,7 +240,7 @@
     __block CGFloat distanceBetweenMenu = ((pMenuButtonSuperView.frame.size.width - (self.maxColumn*eachMenuWidth))/(self.maxColumn +1));
     
     [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        pMenuButtonSuperView.layer.opacity = 1.0;
+        self->pMenuButtonSuperView.layer.opacity = 1.0;
         
         int menuIndex = 0;
         //for each row
@@ -252,12 +252,12 @@
             CGFloat menuCenterX;
             //for each column
             for (int j = 1; j <= remainingMenuButton; j++) {
-                UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:menuIndex];
+                UIButton *menuButton = (UIButton *)[self->menuButtonArray objectAtIndex:menuIndex];
                 menuButton.layer.opacity = 1.0;
                 
                 menuCenterX = (distanceBetweenMenu *j) + (2*j - 1)*(menuButton.frame.size.width/2);
                 if (i == maxRow) {
-                    remainingMenuButton = menuButtonArray.count % self.maxColumn;
+                    remainingMenuButton = self->menuButtonArray.count % self.maxColumn;
                     if (remainingMenuButton == 0) {
                         remainingMenuButton = self.maxColumn;
                     }
@@ -265,8 +265,8 @@
                 }
                 menuButton.center = CGPointMake(menuCenterX, topMenuCenterY);
                 
-                if (menuNameLabelArray.count > menuIndex) {
-                    UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:menuIndex];
+                if (self->menuNameLabelArray.count > menuIndex) {
+                    UILabel *menuNameLabel = (UILabel *)[self->menuNameLabelArray objectAtIndex:menuIndex];
                     menuNameLabel.layer.opacity = 1.0;
                     menuNameLabel.center = CGPointMake(menuButton.center.x, menuButton.frame.origin.y + menuButton.frame.size.height  + (menuNameLabel.frame.size.height / 2) + 5);
                 }
