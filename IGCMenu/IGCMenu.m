@@ -26,6 +26,7 @@
         menuButtonArray = [[NSMutableArray alloc] init];
         menuNameLabelArray = [[NSMutableArray alloc] init];
         //Default values
+        self.currentState = Closed;
         self.disableBackground = YES;
         self.numberOfMenuItem = 0;
         self.menuRadius = 120;
@@ -179,7 +180,9 @@
                 menuNameLabel.layer.opacity = 1.0;
                 menuNameLabel.center = CGPointMake(menuButton.center.x, menuButton.frame.origin.y + menuButton.frame.size.height  + (menuNameLabel.frame.size.height / 2) + 5);
             }
-        }completion:nil];
+        } completion:^(BOOL finished) {
+            self.currentState = Opened;
+        }];
     }
 }
 
@@ -209,6 +212,7 @@
         }
         [self->menuNameLabelArray removeAllObjects];
         [self->menuButtonArray removeAllObjects];
+        self.currentState = Closed;
     }];
 }
 
@@ -274,7 +278,9 @@
                 menuIndex++;
             }
         }
-    }completion:nil];
+    } completion:^(BOOL finished) {
+        self.currentState = Opened;
+    }];
 }
 
 -(void)hideGridMenu{

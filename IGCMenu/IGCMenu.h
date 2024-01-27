@@ -17,6 +17,11 @@ typedef enum {
     None
 }IGCMenuBackgroundOptions;
 
+typedef enum {
+ Opened,
+ Closed
+ }IGCMenuState;
+
 @protocol IGCMenuDelegate <NSObject>
 
 @optional
@@ -28,6 +33,7 @@ typedef enum {
 
 @property (weak) id <IGCMenuDelegate>delegate;
 
+@property (nonatomic) IGCMenuState currentState;    //Curent state of the menu
 @property (nonatomic) NSInteger numberOfMenuItem;   //Number of menu items to show
 @property (nonatomic) CGFloat menuRadius;           //Radius for circular menu
 @property (weak,nonatomic) UIButton *menuButton;    //Menu button reference
