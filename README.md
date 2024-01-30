@@ -1,7 +1,7 @@
 # IGCMenu
 IGCMenu library gives easy way to create **Grid** and **Circular** menu in app.
 
-This is light weight and highly customisable menu.Support iOS 7 and above.
+This is light weight and highly customisable menu.Support iOS 12 and above.
 
 For swift check [swift branch](https://github.com/sunilsharma08/IGCMenu/tree/swift)
 
@@ -35,7 +35,7 @@ For swift check [swift branch](https://github.com/sunilsharma08/IGCMenu/tree/swi
 You can use [CocoaPods](http://cocoapods.org/) to install `IGCMenu` by adding it to your `Podfile`:
 
 ```Ruby
-platform :ios, '8.0'
+platform :ios, '12.0'
 
 target 'TargetName' do
 pod 'IGCMenu'
