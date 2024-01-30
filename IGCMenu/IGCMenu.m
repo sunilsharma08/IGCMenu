@@ -33,14 +33,17 @@
         menuButtonArray = [[NSMutableArray alloc] init];
         menuNameLabelArray = [[NSMutableArray alloc] init];
         //Default values
+        self.currentState = Closed;
         self.disableBackground = YES;
         self.numberOfMenuItem = 0;
         self.menuRadius = 120;
         self.maxColumn = 3;
         self.backgroundType = BlurEffectDark;
+        self.menuTitleColor = [UIColor whiteColor];
+        self.menuTitleFont = [UIFont systemFontOfSize:12];
         self.positionStyle = Top;
         
-        //observe orientation changes
+        //Observe orientation changes
         [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
         [[NSNotificationCenter defaultCenter]
          addObserver:self selector:@selector(orientationChanged:)
@@ -87,12 +90,18 @@
             menuNameLabel.center = menuButton.center;
             menuNameLabel.layer.opacity = 0.0;
             menuNameLabel.textAlignment = NSTextAlignmentCenter;
-            menuNameLabel.font = [UIFont systemFontOfSize:12];
+            menuNameLabel.font = self.menuTitleFont;
             menuNameLabel.text = self.menuItemsNameArray[i];
             [menuNameLabel sizeToFit];
-            menuNameLabel.textColor = [UIColor whiteColor];
+            menuNameLabel.textColor = self.menuTitleColor;
             [pMenuButtonSuperView insertSubview:menuNameLabel belowSubview:self.menuButton];
             [menuNameLabelArray addObject:menuNameLabel];
+        }
+        
+        // Set accessibility label and add the label if present
+        if (self.menuItemsAccessibilityLabelsArray.count > i) {
+            menuButton.isAccessibilityElement = YES;
+            menuButton.accessibilityLabel = self.menuItemsAccessibilityLabelsArray[i];
         }
         
         //Set custom menus button background color if present
@@ -176,9 +185,11 @@
     
     for (int  i = 1; i < menuButtonArray.count * 2; i=i+2) {
         [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-            pMenuButtonSuperView.layer.opacity = 1.0;
+          self->pMenuButtonSuperView.layer.opacity = 1.0;
             [self updateCircularMenuLayoutAtIndex:i];
-        }completion:nil];
+        } completion:^(BOOL finished) {
+            self.currentState = Opened;
+        }];
     }
 }
 
@@ -198,30 +209,31 @@
     isCircularMenu = false;
     
     [UIView animateWithDuration:ANIMATION_DURATION delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        for (int i = 0; i < menuButtonArray.count; i++) {
-            UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:i];
+        for (int i = 0; i < self->menuButtonArray.count; i++) {
+            UIButton *menuButton = (UIButton *)[self->menuButtonArray objectAtIndex:i];
             menuButton.layer.opacity = 0.0;
             menuButton.center = self.menuButton.center;
-            if (menuNameLabelArray.count > i) {
-                UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:i];
+            if (self->menuNameLabelArray.count > i) {
+                UILabel *menuNameLabel = (UILabel *)[self->menuNameLabelArray objectAtIndex:i];
                 menuNameLabel.layer.opacity = 0.0;
                 menuNameLabel.center = self.menuButton.center;
-                pMenuButtonSuperView.layer.opacity = 0.0;
+                self->pMenuButtonSuperView.layer.opacity = 0.0;
             }
         }
     } completion:^(BOOL finished) {
-        [pMenuButtonSuperView removeFromSuperview];
-        pMenuButtonSuperView = nil;
-        for (int i = 0; i < menuButtonArray.count; i++) {
-            UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:i];
+        [self->pMenuButtonSuperView removeFromSuperview];
+        self->pMenuButtonSuperView = nil;
+        for (int i = 0; i < self->menuButtonArray.count; i++) {
+            UIButton *menuButton = (UIButton *)[self->menuButtonArray objectAtIndex:i];
             [menuButton removeFromSuperview];
-            if (menuNameLabelArray.count > i) {
-                UILabel *menuNameLabel = (UILabel *)[menuNameLabelArray objectAtIndex:i];
+            if (self->menuNameLabelArray.count > i) {
+                UILabel *menuNameLabel = (UILabel *)[self->menuNameLabelArray objectAtIndex:i];
                 [menuNameLabel removeFromSuperview];
             }
         }
-        [menuNameLabelArray removeAllObjects];
-        [menuButtonArray removeAllObjects];
+        [self->menuNameLabelArray removeAllObjects];
+        [self->menuButtonArray removeAllObjects];
+        self.currentState = Closed;
     }];
 }
 
@@ -234,9 +246,11 @@
     
     [self setMenuButtonLayout];
     [UIView animateWithDuration:ANIMATION_DURATION delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        pMenuButtonSuperView.layer.opacity = 1.0;
+      self->pMenuButtonSuperView.layer.opacity = 1.0;
         [self updateGridMenuLayout];
-    }completion:nil];
+    } completion:^(BOOL finished) {
+      self.currentState = Opened;
+    }];
 }
 
 -(void)setMenuButtonLayout{
@@ -254,7 +268,7 @@
         }
         topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * maxRow) + menuButton.frame.size.height/2;
     }
-    else{
+    else {
         eachMenuVerticalSpace = self.positionStyle == Top ? 100.0 : -100.0;
         topMenuCenterY = topMenuCenterY - (eachMenuVerticalSpace * maxRow) + eachMenuVerticalSpace/3;
     }
@@ -273,12 +287,13 @@
         CGFloat menuCenterX;
         //for each column
         for (int j = 1; j <= remainingMenuButton; j++) {
+          
             UIButton *menuButton = (UIButton *)[menuButtonArray objectAtIndex:menuIndex];
             menuButton.layer.opacity = 1.0;
-            
+          
             menuCenterX = (distanceBetweenMenu *j) + (2*j - 1)*(menuButton.frame.size.width/2);
             if (i == maxRow) {
-                remainingMenuButton = menuButtonArray.count % self.maxColumn;
+                remainingMenuButton = self->menuButtonArray.count % self.maxColumn;
                 if (remainingMenuButton == 0) {
                     remainingMenuButton = self.maxColumn;
                 }
